@@ -1,0 +1,5 @@
+block标签
+wx:if--wx:elif--wx:else
+wx:for--wx:for-item--wx:for-index--wx:key
+hidden属性 不要和display一起用
+console.log打印日志

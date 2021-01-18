@@ -1,0 +1,65 @@
+<!--pages/demo1/demo1.wxml-->
+<page>
+  <view class="page">
+    <view class="page__hd">
+      <view class="weui-panel__hd">
+        <a class="weui-media-box weui-media-box_appmsg">
+          <view class="weui-media-box__hd">
+            <image class="weui-media-box__thumb" style="height: 400rpx" src="../../image/demo.jpg" alt></image>
+          </view>
+          <view class="weui-media-box__bd">
+            <text style="font-size: 40rpx; opacity:1">草堂之声，雨润万物\n</text>
+            <text style="font-size: 30rpx; opacity:0.7">讲解时长100分钟 讲解18条\n</text>
+            <text style="font-size: 35rpx; opacity:1">张三\t</text>
+            <text style="font-size: 30rpx; opacity:0.7">\t五星级讲解员\n</text>
+            <text style="font-size: 30rpx; color: red; opacity:0.7">此处后续增加评分</text>
+          </view>
+        </a>
+      </view>
+    </view>
+    <view class="page__hd">
+      <view class="weui-panel__hd">
+        <h4 class="weui-media-box__title">讲解指南</h4><text>\n</text>
+        <text style="font-size: 25rpx;">\t张三，中国人最耳熟能详的名字。张三可能真有其人，但更多时候与李四、王五一起指代不特定的某个人，揶揄或者概括常用。例如古代说书人常说：那张三的李四的都来了。也常被用在文学影视作品中。因此名平常普通，近来也被用来指代一个普通人群体，即“张三族”。
+        </text>
+      </view>
+    </view>
+    <view class="page__hd">
+      <view class="weui-panel__hd">
+        <h4 class="weui-media-box__title" style="color: red">1 草堂概况</h4><text>\n</text>
+        <image style="width: 680rpx; height: 340rpx" src="../../image/demo1.1.jpg"></image>
+        <text style="font-size: 25rpx;">1 - 1 概况\n</text>
+        
+    <view class='audiosBox'>
+        <view class="audioOpen" bindtap="listenerButtonPlay" wx:if="{{!isOpen}}">
+          <image class='image2' src="../../image/play.png" />
+        </view>
+        <view class="audioOpen" bindtap="listenerButtonPause" wx:if="{{isOpen}}">
+          <image src="../../image/pause.png" />
+        </view>
+        <view class='slid'>
+          <slider bindchange="sliderChange"  block-size="12px" step="2" value="{{offset}}" max="{{max}}" selected-color="#4c9dee" />
+          <view>
+            <text class='times'>{{starttime}}</text> <!-- 进度时长 -->
+            <text class='times'>{{duration}}</text>   <!-- 总时长 -->
+          </view>
+        </view>
+    </view>
+    <view>
+      <video 
+        id="myVideo" 
+        src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400" 
+        binderror="videoErrorCallback" 
+        show-center-play-btn='{{true}}' 
+        show-play-btn="{{true}}" 
+        controls
+        picture-in-picture-mode="{{['push', 'pop']}}"
+        bindenterpictureinpicture='bindVideoEnterPictureInPicture'
+        bindleavepictureinpicture='bindVideoLeavePictureInPicture'
+      ></video>
+    </view>
+      </view>
+    </view>
+
+  </view>
+</page>
