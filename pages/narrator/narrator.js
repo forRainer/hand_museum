@@ -8,31 +8,52 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isPayed: false,
     isOpen: false,//播放开关
     starttime: '00:00', //正在播放时长
     duration: '01:00',   //总时长
-    src: "media/demo.mp3"
+    src: "media/demo.mp3",
+    reason: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      reason: options.reason
+      })
+    console.log('load')
+    console.log(this.data.reason)
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    console.log('ready')
+    console.log(this.data.reason)
+    if(this.data.reason == "1"){
+      wx.showToast({  
+        title: '取消支付',  
+        icon: 'none',  
+        duration: 1500  
+      })
+    } else if(this.data.reason == "2") {
+      wx.showToast({  
+        title: '已支付',  
+        icon: 'success',  
+        duration: 1500  
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    console.log('show')
+    console.log(this.data.reason)
   },
 
   /**
@@ -137,6 +158,12 @@ Page({
     bgMusic.seek(offset);
     that.setData({
       isOpen: true,
+    })
+  },
+
+  jumpToPreview: function (e) {
+    wx.navigateTo({
+      url: '/pages/preview/preview?price=12.00'
     })
   }
 })

@@ -1,32 +1,22 @@
-// pages/demo/demo.js
+// pages/preview/preview.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    msg: "fuck you",
-    list: [
-      {
-        id: 0,
-        data: "aaa"
-      },
-      {
-        id: 1,
-        data: "bbb"
-      }
-    ],
-    user: {
-      age: 18,
-      hight: 1.7
-    }
+    price: 0.00
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options.price);
+    this.setData({
+      price: options.price
+      })
+    console.log(this.price);
   },
 
   /**
@@ -78,9 +68,9 @@ Page({
 
   },
 
-  jumpTo: function (e) {
+  jumpBack: function (e) {
     wx.navigateTo({
-      url: '/pages/demo1/demo1'
+      url: '/pages/narrator/narrator?reason=' + e.currentTarget.dataset.flag
     })
-  }
+  },
 })

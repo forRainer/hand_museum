@@ -63,3 +63,11 @@ slider{
   text-indent: 2em;
  
 }
+
+.add_icon{
+  position: fixed;
+  width:70rpx;
+  height:70rpx;
+  bottom: 70rpx;
+  right: 70rpx;
+}
