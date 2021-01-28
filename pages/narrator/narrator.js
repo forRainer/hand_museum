@@ -12,7 +12,7 @@ Page({
     isOpen: false,//播放开关
     starttime: '00:00', //正在播放时长
     duration: '01:00',   //总时长
-    src: "media/demo.mp3",
+    src: "http://118.31.17.153/medias/demo.mp3",
     reason: 0
   },
 
