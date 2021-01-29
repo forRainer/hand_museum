@@ -13,18 +13,44 @@ Page({
     starttime: '00:00', //正在播放时长
     duration: '01:00',   //总时长
     src: "http://118.31.17.153/medias/demo.mp3",
-    reason: 0
+    pay_status: 0,
+    area_code: 0,
+    narrator_code: 0,
+    narrator:{
+      name: 0,
+      title: 0,
+      img_url: 0,
+      price: 0,
+      score: 0,
+      explain_overview: 0
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      reason: options.reason
-      })
-    console.log('load')
-    console.log(this.data.reason)
+    var that = this;
+    that.setData({
+      pay_status: options.pay_status,
+      area_code: options.area_code,
+      narrator_code: options.narrator_code
+    })
+    var app = getApp();
+    wx.request({
+      url: app.globalData.server_address + '/narrator',
+      data: {
+        area_code: that.data.area_code,
+        narrator_code: that.data.narrator_code
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function(res) {
+        console.log(res.data)
+
+      }
+    })
   },
 
   /**
@@ -32,14 +58,14 @@ Page({
    */
   onReady: function () {
     console.log('ready')
-    console.log(this.data.reason)
-    if(this.data.reason == "1"){
+    console.log(this.data.pay_status)
+    if(this.data.pay_status == "1"){
       wx.showToast({  
         title: '取消支付',  
         icon: 'none',  
         duration: 1500  
       })
-    } else if(this.data.reason == "2") {
+    } else if(this.data.pay_status == "2") {
       wx.showToast({  
         title: '已支付',  
         icon: 'success',  
@@ -53,7 +79,7 @@ Page({
    */
   onShow: function () {
     console.log('show')
-    console.log(this.data.reason)
+    console.log(this.data.pay_status)
   },
 
   /**

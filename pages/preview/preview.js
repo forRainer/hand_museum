@@ -70,7 +70,7 @@ Page({
 
   jumpBack: function (e) {
     wx.navigateTo({
-      url: '/pages/narrator/narrator?reason=' + e.currentTarget.dataset.flag
+      url: '/pages/narrator/narrator?pay_status=' + e.currentTarget.dataset.flag
     })
   },
 })
