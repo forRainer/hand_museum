@@ -34,6 +34,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    server_address: 'http://118.31.17.153:8080'
   }
 })

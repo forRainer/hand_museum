@@ -5,50 +5,14 @@
       <image style="width: 750rpx; height: 300rpx" src="../../image/demo.png"></image>
     </view>
     <view class="weui-panel weui-panel__hd">全部景区</view>
-    <view class="page__hd"  bindtap="jumpTo">
-      <a class="weui-media-box weui-media-box_appmsg">
+    <view class="page__hd">
+      <a bindtap="jumpTo" class="weui-media-box weui-media-box_appmsg" wx:for="{{area_count}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-code="{{area_list[index].area_code}}">
         <view class="weui-media-box__hd">
-          <image class="weui-media-box__thumb" src="../../image/demo.png" alt></image>
+          <image class="weui-media-box__thumb" src="{{area_list[index].img_url}}" alt></image>
         </view>
         <view class="weui-media-box__bd">
-          <h4 class="weui-media-box__title">周恩来祖居</h4>
-          <view class="weui-media-box__desc">周恩来祖居，浙江省重点文物保护单位阿斯达所大所大大所大所多实打实大所大所大所多</view>
-        </view>
-      </a>
-      <a class="weui-media-box weui-media-box_appmsg">
-        <view class="weui-media-box__hd">
-          <image class="weui-media-box__thumb" src="../../image/demo.png" alt></image>
-        </view>
-        <view class="weui-media-box__bd">
-          <h4 class="weui-media-box__title">蔡元培故居</h4>
-          <view class="weui-media-box__desc">国宝</view>
-        </view>
-      </a>
-      <a class="weui-media-box weui-media-box_appmsg">
-        <view class="weui-media-box__hd">
-          <image class="weui-media-box__thumb" src="../../image/demo.png" alt></image>
-        </view>
-        <view class="weui-media-box__bd">
-          <h4 class="weui-media-box__title">秋瑾故居</h4>
-          <view class="weui-media-box__desc">周恩来祖居，浙江省重点文物保护单位</view>
-        </view>
-      </a>
-      <a class="weui-media-box weui-media-box_appmsg">
-        <view class="weui-media-box__hd">
-          <image class="weui-media-box__thumb" src="../../image/demo.png" alt></image>
-        </view>
-        <view class="weui-media-box__bd">
-          <h4 class="weui-media-box__title">大通学堂</h4>
-          <view class="weui-media-box__desc">周恩来祖居，浙江省重点文物保护单位</view>
-        </view>
-      </a>
-      <a class="weui-media-box weui-media-box_appmsg">
-        <view class="weui-media-box__hd">
-          <image class="weui-media-box__thumb" src="../../image/demo.png" alt></image>
-        </view>
-        <view class="weui-media-box__bd">
-          <h4 class="weui-media-box__title">鲁迅故里</h4>
-          <view class="weui-media-box__desc">周恩来祖居，浙江省重点文物保护单位</view>
+          <h4 class="weui-media-box__title">{{area_list[index].name}}</h4>
+          <view class="weui-media-box__desc">{{area_list[index].brief_introduction}}</view>
         </view>
       </a>
     </view>

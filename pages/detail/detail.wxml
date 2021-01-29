@@ -2,78 +2,28 @@
 <page>
   <view class="page">
     <view class="weui-panel__hd" style="display: flex; justify-content: center;">
-      <image style="height: 400rpx; width: 400rpx; border-radius: 400rpx;" src="../../image/demo11.jpg"></image>
+      <image style="height: 400rpx; width: 400rpx; border-radius: 400rpx;" src="{{area_img_url}}"></image>
     </view>
     <view class="weui-panel__hd" style="display: flex; justify-content: center;">
-      <view class="weui-article__h2" style="font-size: 40rpx;">周恩来祖居</view>
+      <view class="weui-article__h2" style="font-size: 40rpx;">{{area_name}}</view>
     </view>
-    <view class="weui-panel__hd">
+    <view class="weui-panel__bd">
       <view class="weui-article__p" style="font-size: 30rpx;">
-        周恩来纪念馆位于浙江省绍兴市区劳动路，馆区由周恩来祖居、纪念广场、风范园等组成。周恩来祖居为明清风格建筑，1984年对外开放，陈云题写匾额，为浙江省文物保护单位和爱国主义教育基地。
+        {{introduction}}
       </view>
     </view>
     <view class="weui-panel weui-panel__hd">讲解员列表</view>
-    <view class="page__hd"  bindtap="jumpTo">
-      <a class="weui-media-box weui-media-box_appmsg">
+    <view class="page__hd">
+      <a class="weui-media-box weui-media-box_appmsg" bindtap="jumpTo" wx:for="{{narrator_count}}" wx:for-index="index" wx:key="*this" data-code="{{narrator_list[index].narrator_code}}">
         <view class="weui-media-box__hd">
-          <image class="weui-media-box__thumb" style="height: 120rpx; width: 120rpx; border-radius: 120rpx;" src="../../image/demo11.jpg" alt></image>
+          <image class="weui-media-box__thumb" style="height: 120rpx; width: 120rpx; border-radius: 120rpx;" src="{{narrator_list[index].img_url}}" alt></image>
         </view>
         <view class="weui-media-box__bd">
-          <h4 class="weui-media-box__title">张三</h4>
-          <view class="weui-media-box__desc">五星级讲解员</view>
+          <h4 class="weui-media-box__title">{{narrator_list[index].name}}</h4>
+          <view class="weui-media-box__desc">{{narrator_list[index].title}}</view>
           <view style="display: flex;">
             <view class="weui-media-box__desc">热度:　</view>
             <image style="width: 40rpx;height: 40rpx;" src="../../image/fire.png"></image>
-            <image style="width: 40rpx;height: 40rpx;" src="../../image/fire.png"></image>
-            <image style="width: 40rpx;height: 40rpx;" src="../../image/fire.png"></image>
-            <image style="width: 40rpx;height: 40rpx;" src="../../image/fire.png"></image>
-            <image style="width: 40rpx;height: 40rpx;" src="../../image/fire.png"></image>
-          </view>
-
-        </view>
-      </a>
-      <a class="weui-media-box weui-media-box_appmsg">
-        <view class="weui-media-box__hd">
-          <image class="weui-media-box__thumb" style="height: 120rpx; width: 120rpx; border-radius: 120rpx;" src="../../image/demo11.jpg" alt></image>
-        </view>
-        <view class="weui-media-box__bd">
-          <h4 class="weui-media-box__title">李四</h4>
-          <view class="weui-media-box__desc">五星级讲解员</view>
-          <view style="display: flex;">
-            <view class="weui-media-box__desc">热度:　</view>
-            <image style="width: 40rpx;height: 40rpx;" src="../../image/fire.png"></image>
-            <image style="width: 40rpx;height: 40rpx;" src="../../image/fire.png"></image>
-            <image style="width: 40rpx;height: 40rpx;" src="../../image/fire.png"></image>
-            <image style="width: 40rpx;height: 40rpx;" src="../../image/fire.png"></image>
-            <image style="width: 40rpx;height: 40rpx;" src="../../image/fire.png"></image>
-          </view>
-        </view>
-      </a>
-      <a class="weui-media-box weui-media-box_appmsg">
-        <view class="weui-media-box__hd">
-          <image class="weui-media-box__thumb" style="height: 120rpx; width: 120rpx; border-radius: 120rpx;" src="../../image/demo11.jpg" alt></image>
-        </view>
-        <view class="weui-media-box__bd">
-          <h4 class="weui-media-box__title">王五</h4>
-          <view class="weui-media-box__desc">五星级讲解员</view>
-          <view style="display: flex;">
-            <view class="weui-media-box__desc">热度:　</view>
-            <image style="width: 40rpx;height: 40rpx;" src="../../image/fire.png"></image>
-            <image style="width: 40rpx;height: 40rpx;" src="../../image/fire.png"></image>
-            <image style="width: 40rpx;height: 40rpx;" src="../../image/fire.png"></image>
-            <image style="width: 40rpx;height: 40rpx;" src="../../image/fire.png"></image>
-          </view>
-        </view>
-      </a>
-      <a class="weui-media-box weui-media-box_appmsg">
-        <view class="weui-media-box__hd">
-          <image class="weui-media-box__thumb" style="height: 120rpx; width: 120rpx; border-radius: 120rpx;" src="../../image/demo11.jpg" alt></image>
-        </view>
-        <view class="weui-media-box__bd">
-          <h4 class="weui-media-box__title">赵六</h4>
-          <view class="weui-media-box__desc">五星级讲解员</view>
-          <view style="display: flex;">
-            <view class="weui-media-box__desc">热度:　</view>
             <image style="width: 40rpx;height: 40rpx;" src="../../image/fire.png"></image>
             <image style="width: 40rpx;height: 40rpx;" src="../../image/fire.png"></image>
             <image style="width: 40rpx;height: 40rpx;" src="../../image/fire.png"></image>
@@ -82,6 +32,5 @@
         </view>
       </a>
     </view>
-
   </view>
 </page>

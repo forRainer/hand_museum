@@ -5,27 +5,32 @@ Page({
    * 页面的初始数据
    */
   data: {
-    msg: "fuck you",
-    list: [
-      {
-        id: 0,
-        data: "aaa"
-      },
-      {
-        id: 1,
-        data: "bbb"
-      }
-    ],
-    user: {
-      age: 18,
-      hight: 1.7
-    }
+    area_count: 0,
+    area_list: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
+    var app = getApp();
+    wx.request({
+      url: app.globalData.server_address + "/all",
+      data: {
+
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function(res) {
+        console.log(res.data)
+        that.setData({
+          area_count: res.data.count,
+          area_list: res.data.list
+        })
+      }
+    })
 
   },
 
@@ -79,8 +84,9 @@ Page({
   },
 
   jumpTo: function (e) {
+    console.log(e)
     wx.navigateTo({
-      url: '/pages/detail/detail'
+      url: '/pages/detail/detail?area_code='+e.currentTarget.dataset.code
     })
   }
 })
