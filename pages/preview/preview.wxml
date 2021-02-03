@@ -7,11 +7,11 @@
     <view class="weui-form-preview__bd">
       <view class="weui-form-preview__item">
         <label class="weui-form-preview__label">景区</label>
-        <text class="weui-form-preview__value">周恩来故居</text>
+        <text class="weui-form-preview__value">{{area_name}}</text>
       </view>
       <view class="weui-form-preview__item">
         <label class="weui-form-preview__label">讲解员</label>
-        <text class="weui-form-preview__value">周恩来</text>
+        <text class="weui-form-preview__value">{{narrator_name}}</text>
       </view>
       <view class="weui-form-preview__item">
         <label class="weui-form-preview__label">订单编号</label>

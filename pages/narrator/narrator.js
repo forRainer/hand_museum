@@ -8,11 +8,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isPayed: false,
     isOpen: false,//播放开关
     starttime: '00:00', //正在播放时长
     duration: '01:00',   //总时长
     src: "http://118.31.17.153/medias/demo.mp3",
+
+    isPayed: false,
     pay_status: 0,
     area_code: 0,
     narrator_code: 0,
@@ -23,7 +24,9 @@ Page({
       price: 0,
       score: 0,
       explain_overview: 0
-    }
+    },
+    content_count: 0,
+    content_list: 0
   },
 
   /**
@@ -32,7 +35,6 @@ Page({
   onLoad: function (options) {
     var that = this;
     that.setData({
-      pay_status: options.pay_status,
       area_code: options.area_code,
       narrator_code: options.narrator_code
     })
@@ -40,7 +42,7 @@ Page({
     wx.request({
       url: app.globalData.server_address + '/narrator',
       data: {
-        area_code: that.data.area_code,
+        area_code: 0,
         narrator_code: that.data.narrator_code
       },
       header: {
@@ -48,7 +50,27 @@ Page({
       },
       success: function(res) {
         console.log(res.data)
-
+        let narrator_name = 'narrator.name';
+        let narrator_title = 'narrator.title';
+        let narrator_img_url = 'narrator.img_url';
+        let narrator_price = 'narrator.price';
+        let narrator_score = 'narrator.score';
+        let narrator_explain_overview = 'narrator.explain_overview';
+        that.setData({
+          [narrator_name]: res.data.narrator_info.name,
+          [narrator_title]: res.data.narrator_info.title,
+          [narrator_img_url]: res.data.narrator_info.img_url,
+          [narrator_price]: res.data.narrator_info.price,
+          [narrator_score]: res.data.narrator_info.score,
+          [narrator_explain_overview]: res.data.narrator_info.explain_overview,
+          content_count: res.data.content_count,
+          content_list: res.data.content_list
+        })
+        console.log(that.data.content_list)
+        for(var item in that.data.content_list){
+          that.data.content_list[item].is_open = false;
+          that.data.content_list[item].starttime = '0:00';
+        }
       }
     })
   },
@@ -166,7 +188,7 @@ Page({
   },
   //暂停播放
   listenerButtonPause(){
-     var that = this
+    var that = this
     bgMusic.pause()
     that.setData({
       isOpen: false,
@@ -189,7 +211,7 @@ Page({
 
   jumpToPreview: function (e) {
     wx.navigateTo({
-      url: '/pages/preview/preview?price=12.00'
+      url: '/pages/preview/preview?area_code=' + this.data.area_code + '&narrator_code=' + this.data.narrator_code + '&price=' + this.data.narrator.price
     })
   }
 })
