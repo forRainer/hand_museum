@@ -10,6 +10,7 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log(res);
       }
     })
     // 获取用户信息
@@ -35,6 +36,6 @@ App({
   },
   globalData: {
     userInfo: null,
-    server_address: 'http://118.31.17.153:8080'
+    server_address: 'http://47.114.120.151:8080'
   }
 })

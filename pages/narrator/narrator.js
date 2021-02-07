@@ -1,5 +1,6 @@
 // pages/demo1/demo1.js
-const bgMusic = wx.createInnerAudioContext()
+var bgMusic = new Array()
+var wait_flag = new Array()
 const app = getApp()
 
 Page({
@@ -8,12 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isOpen: false,//播放开关
-    starttime: '00:00', //正在播放时长
-    duration: '01:00',   //总时长
-    src: "http://118.31.17.153/medias/demo.mp3",
-
-    isPayed: false,
+    isPayed: true,
     pay_status: 0,
     area_code: 0,
     narrator_code: 0,
@@ -66,11 +62,11 @@ Page({
           content_count: res.data.content_count,
           content_list: res.data.content_list
         })
-        console.log(that.data.content_list)
-        for(var item in that.data.content_list){
-          that.data.content_list[item].is_open = false;
-          that.data.content_list[item].starttime = '0:00';
+        for(var i = 0; i < that.data.content_count; ++i){
+          bgMusic[i] = wx.createInnerAudioContext();
+          wait_flag[i] = false;
         }
+        console.log(that.data.content_list)
       }
     })
   },
@@ -143,69 +139,95 @@ Page({
 
   // 播放
   listenerButtonPlay: function (e) {
+    console.log('bgmusic', bgMusic)
+    console.log('listenerButtonPlay')
+    var index = e.currentTarget.dataset.index;
     var that = this;
+    var content_list_tmp = that.data.content_list
     //bug ios 播放时必须加title 不然会报错导致音乐不播放
-    bgMusic.title = '此时此刻'  
-    bgMusic.epname = '此时此刻'
-    bgMusic.src = that.data.src;
-    console.log(1111)
-    bgMusic.onTimeUpdate(() => { 
+    bgMusic[index].title = '绍兴古城' + index
+    bgMusic[index].epname = '绍兴古城' + index
+    bgMusic[index].src = content_list_tmp[index].audio_url;
+
+    bgMusic[index].onTimeUpdate(() => {
       //bgMusic.duration总时长  bgMusic.currentTime当前进度
-      console.log(2222)
-      console.log(bgMusic.currentTime)
-      var duration = bgMusic.duration; 
-      var offset = bgMusic.currentTime;  
-      var currentTime = parseInt(bgMusic.currentTime);
+      console.log('onTimeUpdate')
+      var duration = bgMusic[index].duration;
+      var offset = bgMusic[index].currentTime;
+      var currentTime = parseInt(bgMusic[index].currentTime);
       var min = "0" + parseInt(currentTime / 60);
-      var max = parseInt(bgMusic.duration);
+      var max = parseInt(bgMusic[index].duration);
       var sec = currentTime % 60;
       if (sec < 10) {
         sec = "0" + sec;
       };
       var starttime = min + ':' + sec;   /*  00:00  */
+      content_list_tmp[index].offset = currentTime;
+      console.log('currentTime', currentTime)
+      content_list_tmp[index].start_time = starttime;
+      content_list_tmp[index].max = max;
+      console.log('max', max)
+      content_list_tmp[index].changePlay = true;
       that.setData({
-        offset: currentTime,
-        starttime: starttime,
-        max: max,
-        changePlay: true
+        content_list: content_list_tmp
       })
+      console.log(that.data.content_list)
     })
+
     //播放结束
-    bgMusic.onEnded(() => {
+    bgMusic[index].onEnded(() => {
+      content_list_tmp[index].start_time = '0:00'
+      content_list_tmp[index].is_open = false
+      content_list_tmp[index].offset = 0
       that.setData({
-        starttime: '00:00',
-        isOpen: false,
-        offset: 0
+        content_list: content_list_tmp
       })
       console.log("音乐播放结束");
     })
-    console.log(222);
-    bgMusic.play();
-    console.log(bgMusic.duration);
+    
+    bgMusic[index].play();
+    setTimeout(() => {
+      console.log(bgMusic[index].paused)
+    }, 100)
+    console.log(bgMusic[index].duration);
+    content_list_tmp[index].is_open = true
     that.setData({
-      isOpen: true,
+      content_list: content_list_tmp
     })
+    console.log(that.data.content_list)
   },
   //暂停播放
-  listenerButtonPause(){
-    var that = this
-    bgMusic.pause()
+  listenerButtonPause(e){
+    console.log('listenerButtonPause')
+    var index = e.currentTarget.dataset.index;
+    var that = this;
+    var content_list_tmp = that.data.content_list
+    content_list_tmp[index].is_open = false
+    bgMusic[index].pause()
     that.setData({
-      isOpen: false,
+      content_list: content_list_tmp
     })
   },
   listenerButtonStop(){
     var that = this
-    bgMusic.stop()
+    bgMusic[index].stop()
   },
   // 进度条拖拽
   sliderChange(e) {
+    console.log('sliderChange')
     var that = this
+    var index = e.currentTarget.dataset.index;
+    var content_list_tmp = that.data.content_list
     var offset = parseInt(e.detail.value);
-    bgMusic.play();
-    bgMusic.seek(offset);
+    content_list_tmp[index].is_open = true;
+    content_list_tmp[index].offset = offset;
+    bgMusic[index].play();
+    setTimeout(() => {
+      console.log(bgMusic[index].paused)
+    }, 100)
+    bgMusic[index].seek(offset);
     that.setData({
-      isOpen: true,
+      content_list: content_list_tmp
     })
   },
 

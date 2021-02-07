@@ -31,17 +31,17 @@
       <text style="font-size: 25rpx;" wx:if="{{index==0}}">试听\n</text>
       <view wx:if="{{index==0 || isPayed}}">
         <view class='audiosBox'>
-          <view class="audioOpen" bindtap="listenerButtonPlay" wx:if="{{!isOpen}}">
+          <view class="audioOpen" bindtap="listenerButtonPlay"  data-index="{{index}}" wx:if="{{!content_list[index].is_open}}">
             <image class='image2' src="../../image/play.png" />
           </view>
-        <view class="audioOpen" bindtap="listenerButtonPause" wx:if="{{isOpen}}">
+        <view class="audioOpen" bindtap="listenerButtonPause" data-index="{{index}}" wx:if="{{content_list[index].is_open}}">
           <image src="../../image/pause.png" />
         </view>
           <view class='slid'>
-            <slider bindchange="sliderChange"  block-size="12px" step="2" value="{{offset}}" max="{{max}}" selected-color="#4c9dee" />
+            <slider bindchange="sliderChange" data-index="{{index}}"  block-size="12px" step="1" value="{{content_list[index].offset}}" max="{{content_list[index].max}}" selected-color="#4c9dee" />
             <view>
-              <text class='times'>{{starttime}}</text> <!-- 进度时长 -->
-              <text class='times'>{{duration}}</text>   <!-- 总时长 -->
+              <text class='times'>{{content_list[index].start_time}}</text> <!-- 进度时长 -->
+              <text class='times'>{{content_list[index].duration}}</text>   <!-- 总时长 -->
             </view>
           </view>
         </view>
