@@ -1,4 +1,5 @@
 // pages/preview/preview.js
+const app = getApp()
 Page({
 
   /**
@@ -9,8 +10,7 @@ Page({
     area_code: 0,
     narrator_code: 0,
     area_name: 0,
-    narrator_name: 0,
-    shouw_price: 0
+    narrator_name: 0
   },
 
   /**
@@ -23,7 +23,6 @@ Page({
       area_code: options.area_code,
       narrator_code: options.narrator_code
     })
-    var app = getApp();
     wx.request({
       url: app.globalData.server_address + '/preview',
       data: {
@@ -94,8 +93,36 @@ Page({
   },
 
   jumpBack: function (e) {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '/pages/narrator/narrator?pay_status=' + e.currentTarget.dataset.flag + '&area_code=' + this.data.area_code + '&narrator_code=' + this.data.narrator_code
+    })
+  },
+
+  goPay: function (e) {
+    var that = this;
+    var pay_status = null; // 1表示取消支付， 2表示支付成功
+    // 先调用微信支付接口
+
+
+    // 再向后台发送订单
+    wx.request({
+      url: app.globalData.server_address + '/insert_order',
+      data: {
+        area_code: that.data.area_code,
+        narrator_code: that.data.narrator_code,
+        user_id: app.globalData.userId,
+        price: that.data.price
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function(res) {
+        console.log('insert 21900', res)
+        pay_status = res.data.pay_status;
+        wx.redirectTo({
+          url: '/pages/narrator/narrator?pay_status=' + pay_status + '&area_code=' + that.data.area_code + '&narrator_code=' + that.data.narrator_code
+        })
+      }
     })
   },
 })

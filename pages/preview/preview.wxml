@@ -14,17 +14,13 @@
         <text class="weui-form-preview__value">{{narrator_name}}</text>
       </view>
       <view class="weui-form-preview__item">
-        <label class="weui-form-preview__label">订单编号</label>
-        <text class="weui-form-preview__value">88888888</text>
-      </view>
-      <view class="weui-form-preview__item">
         <label class="weui-form-preview__label">其他说明</label>
         <text class="weui-form-preview__value">您可以在\n我的—我的订单\n进行评价和反馈</text>
       </view>
     </view>
     <view class="weui-form-preview__ft" style="position: fixed; bottom: 0;width: 100%; height: 105rpx;">
       <a class="weui-form-preview__btn weui-form-preview__btn_default" bindtap="jumpBack" data-flag="1">返回</a>
-      <a class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="jumpBack" data-flag="2">购买</a>
+      <a class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="goPay" data-flag="2">购买</a>
     </view>
   </view>
 </view>

@@ -10,7 +10,7 @@ Page({
    */
   data: {
     isPayed: true,
-    pay_status: 0,
+    pay_status: null,
     area_code: 0,
     narrator_code: 0,
     narrator:{
@@ -30,16 +30,18 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    console.log('222222', options)
     that.setData({
       area_code: options.area_code,
-      narrator_code: options.narrator_code
+      narrator_code: options.narrator_code,
+      pay_status: options.pay_status
     })
-    var app = getApp();
     wx.request({
       url: app.globalData.server_address + '/narrator',
       data: {
         area_code: 0,
-        narrator_code: that.data.narrator_code
+        narrator_code: that.data.narrator_code,
+        user_id: app.globalData.userId
       },
       header: {
         'content-type': 'application/json' // 默认值
@@ -60,7 +62,8 @@ Page({
           [narrator_score]: res.data.narrator_info.score,
           [narrator_explain_overview]: res.data.narrator_info.explain_overview,
           content_count: res.data.content_count,
-          content_list: res.data.content_list
+          content_list: res.data.content_list,
+          isPayed: res.data.is_payed
         })
         for(var i = 0; i < that.data.content_count; ++i){
           bgMusic[i] = wx.createInnerAudioContext();
@@ -208,9 +211,12 @@ Page({
       content_list: content_list_tmp
     })
   },
+  // 停止所有音乐播放
   listenerButtonStop(){
     var that = this
-    bgMusic[index].stop()
+    for(var i = 0; i < that.data.content_count; ++i){
+      bgMusic[i].stop();
+    }
   },
   // 进度条拖拽
   sliderChange(e) {
@@ -232,7 +238,7 @@ Page({
   },
 
   jumpToPreview: function (e) {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '/pages/preview/preview?area_code=' + this.data.area_code + '&narrator_code=' + this.data.narrator_code + '&price=' + this.data.narrator.price
     })
   }

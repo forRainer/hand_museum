@@ -58,9 +58,12 @@
       </view>
     </view>
 
-    <view bindtap="jumpToPreview">
-      <image class="add_icon" src="../../image/buy.png"></image>
+    <view wx:if="{{!isPayed}}">
+      <view bindtap="jumpToPreview">
+        <image class="add_icon" src="../../image/buy.png"></image>
+      </view>
     </view>
+
 
   </view>
 </page>
