@@ -98,12 +98,8 @@ Page({
     })
   },
 
-  goPay: function (e) {
-    var that = this;
-    var pay_status = null; // 1表示取消支付， 2表示支付成功
-    // 先调用微信支付接口
 
-
+  insertOrder: function(){
     // 再向后台发送订单
     wx.request({
       url: app.globalData.server_address + '/insert_order',
@@ -121,6 +117,43 @@ Page({
         pay_status = res.data.pay_status;
         wx.redirectTo({
           url: '/pages/narrator/narrator?pay_status=' + pay_status + '&area_code=' + that.data.area_code + '&narrator_code=' + that.data.narrator_code
+        })
+      }
+    })
+  },
+
+  goPay: function (e) {
+    var that = this;
+    var pay_status = null; // 0表示支付失败， 1表示取消支付， 2表示支付成功
+    // 先调用微信支付接口
+    wx.request({
+      url: app.globalData.server_address + '/wx_pay',
+      data: {
+        user_id: app.globalData.userId,
+        price: that.data.price
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        wx.requestPayment({
+          timeStamp: res.data.timeStamp,
+          nonceStr: res.data.nonceStr,
+          package: res.data.package,
+          signType: res.data.signType,
+          paySign: res.data.paySign,
+          success: function (res) {
+            console.log('pay success', res)
+            this.insertOrder;
+            pay_status = 2
+            wx.redirectTo({
+              url: '/pages/narrator/narrator?pay_status=' + pay_status + '&area_code=' + that.data.area_code + '&narrator_code=' + that.data.narrator_code
+            })
+          },
+          fail: function (res) {
+            console.log('pay fail', res)
+            pay_status = 0;
+          }
         })
       }
     })

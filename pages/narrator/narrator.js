@@ -92,6 +92,12 @@ Page({
         icon: 'success',  
         duration: 1500  
       })
+    }else if(this.data.pay_status == "0") {
+      wx.showToast({  
+        title: '支付失败',  
+        icon: 'error',  
+        duration: 1500  
+      })
     }
   },
 

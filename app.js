@@ -74,7 +74,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    server_address: 'http://47.114.120.151:8080',
+    server_address: 'http://47.114.120.151',
     appId: '',
     appSecret: '',
     sessionKey: null,
