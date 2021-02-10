@@ -9,7 +9,7 @@ App({
     wx.request({
       url: this.globalData.server_address + '/get_app_info',
       success: (res) => {
-        console.log(res)
+        console.log('get_app_info', res)
         this.globalData.appId = res.data.app_id;
         this.globalData.appSecret = res.data.app_secret;
       }
@@ -19,12 +19,12 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log(res);
+        console.log('login', res);
         if(res.code){
           wx.request({
             url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + this.globalData.appId + '&secret=' + this.globalData.appSecret + '&js_code=' + res.code + '&grant_type=authorization_code',
             success: (res2) => {
-              console.log(res2)
+              console.log('jscode2session', res2)
               this.globalData.sessionKey = res2.data.session_key;
               this.globalData.openId = res2.data.openid;
               this.globalData.userId = res2.data.openid;
@@ -44,7 +44,7 @@ App({
               wx.getUserInfo({
                 success: res => {
                   this.globalData.userInfo = res.userInfo
-                  console.log(res)
+                  console.log('getUserInfo', res)
                   // 可以将 res 发送给后台解码出 unionId
                   wx.request({
                     url: this.globalData.server_address + '/get_unionId',
@@ -58,7 +58,7 @@ App({
                       'content-type': 'application/x-www-form-urlencoded' // 必须这么写
                     },
                     success: (res2) => {
-                      console.log(21900, res2)
+                      console.log('get_unionId', res2)
                     }
                   })
                   // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回

@@ -11,7 +11,7 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    top_img: null
+    top_img_list: null
   },
 
   /**
@@ -22,17 +22,16 @@ Page({
     wx.request({
       url: app.globalData.server_address + "/all",
       data: {
-
       },
       header: {
         'content-type': 'application/json' // 默认值
       },
       success: function(res) {
-        console.log(res.data)
+        console.log('get_all', res.data)
         that.setData({
           area_count: res.data.count,
           area_list: res.data.list,
-          top_img: res.data.top_img
+          top_img_list: res.data.top_img_list
         })
       }
     })
@@ -115,14 +114,12 @@ Page({
   },
 
   jumpTo: function (e) {
-    console.log(e)
     wx.navigateTo({
       url: '/pages/detail/detail?area_code='+e.currentTarget.dataset.code
     })
   },
 
   getUserInfo: function(e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,

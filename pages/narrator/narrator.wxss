@@ -13,7 +13,7 @@
 /*按钮大小  */
 .audioOpen{
   width: 70rpx;
-  height: 70rpx;
+  height: 65rpx;
   border: 2rpx solid #4c9dee;
   border-radius: 50%;
   display: flex;
@@ -22,12 +22,16 @@
   margin-left: 20rpx;
 }
  
-image{
+.image_play{
   width: 30rpx;
   height: 40rpx;
-}
-.image2{
   margin-left: 10%;
+
+}
+
+.image_pause{
+  width: 30rpx;
+  height: 40rpx;
 }
 /*进度条长度  */
 .slid{

@@ -32,10 +32,10 @@
       <view wx:if="{{index==0 || isPayed}}">
         <view class='audiosBox'>
           <view class="audioOpen" bindtap="listenerButtonPlay"  data-index="{{index}}" wx:if="{{!content_list[index].is_open}}">
-            <image class='image2' src="../../image/play.png" />
+            <image class='image_play' src="../../image/play.png" />
           </view>
         <view class="audioOpen" bindtap="listenerButtonPause" data-index="{{index}}" wx:if="{{content_list[index].is_open}}">
-          <image src="../../image/pause.png" />
+          <image class='image_pause' src="../../image/pause.png" />
         </view>
           <view class='slid'>
             <slider bindchange="sliderChange" data-index="{{index}}"  block-size="12px" step="1" value="{{content_list[index].offset}}" max="{{content_list[index].max}}" selected-color="#4c9dee" />

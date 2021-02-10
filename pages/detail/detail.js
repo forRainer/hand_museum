@@ -21,7 +21,6 @@ Page({
     that.setData({
       area_code: options.area_code
     })
-    console.log(that.data.area_code)
     var app = getApp();
     wx.request({
       url: app.globalData.server_address + '/detail',
@@ -32,7 +31,7 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function(res) {
-        console.log(res.data)
+        console.log('detail', res.data)
         that.setData({
           narrator_count: res.data.narrator_count,
           narrator_list: res.data.narrator_list,
@@ -94,7 +93,6 @@ Page({
   },
 
   jumpTo: function (e) {
-    console.log(e)
     wx.navigateTo({
       url: '/pages/narrator/narrator?area_code='+this.data.area_code+'&narrator_code=' + e.currentTarget.dataset.code
     })

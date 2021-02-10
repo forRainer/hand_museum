@@ -30,7 +30,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    console.log('222222', options)
+    console.log('onLoad options', options)
     that.setData({
       area_code: options.area_code,
       narrator_code: options.narrator_code,
@@ -47,7 +47,7 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function(res) {
-        console.log(res.data)
+        console.log('narrator', res.data)
         let narrator_name = 'narrator.name';
         let narrator_title = 'narrator.title';
         let narrator_img_url = 'narrator.img_url';
@@ -69,7 +69,7 @@ Page({
           bgMusic[i] = wx.createInnerAudioContext();
           wait_flag[i] = false;
         }
-        console.log(that.data.content_list)
+        console.log('content_list', that.data.content_list)
       }
     })
   },
@@ -78,8 +78,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    console.log('ready')
-    console.log(this.data.pay_status)
+    console.log('pay_status', this.data.pay_status)
     if(this.data.pay_status == "1"){
       wx.showToast({  
         title: '取消支付',  
@@ -105,8 +104,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log('show')
-    console.log(this.data.pay_status)
+
   },
 
   /**
@@ -148,7 +146,6 @@ Page({
 
   // 播放
   listenerButtonPlay: function (e) {
-    console.log('bgmusic', bgMusic)
     console.log('listenerButtonPlay')
     var index = e.currentTarget.dataset.index;
     var that = this;
@@ -161,8 +158,6 @@ Page({
     bgMusic[index].onTimeUpdate(() => {
       //bgMusic.duration总时长  bgMusic.currentTime当前进度
       console.log('onTimeUpdate')
-      var duration = bgMusic[index].duration;
-      var offset = bgMusic[index].currentTime;
       var currentTime = parseInt(bgMusic[index].currentTime);
       var min = "0" + parseInt(currentTime / 60);
       var max = parseInt(bgMusic[index].duration);
@@ -180,7 +175,6 @@ Page({
       that.setData({
         content_list: content_list_tmp
       })
-      console.log(that.data.content_list)
     })
 
     //播放结束
@@ -196,14 +190,13 @@ Page({
     
     bgMusic[index].play();
     setTimeout(() => {
+      // 必须要这么一句
       console.log(bgMusic[index].paused)
     }, 100)
-    console.log(bgMusic[index].duration);
     content_list_tmp[index].is_open = true
     that.setData({
       content_list: content_list_tmp
     })
-    console.log(that.data.content_list)
   },
   //暂停播放
   listenerButtonPause(e){

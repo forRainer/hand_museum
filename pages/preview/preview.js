@@ -33,7 +33,7 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function(res) {
-        console.log(res.data)
+        console.log('preview', res.data)
         that.setData({
           narrator_name: res.data.narrator_name,
           area_name: res.data.area_name
@@ -113,7 +113,7 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function(res) {
-        console.log('insert 21900', res)
+        console.log('insert_order', res)
         pay_status = res.data.pay_status;
         wx.redirectTo({
           url: '/pages/narrator/narrator?pay_status=' + pay_status + '&area_code=' + that.data.area_code + '&narrator_code=' + that.data.narrator_code
