@@ -28,6 +28,10 @@ App({
               this.globalData.sessionKey = res2.data.session_key;
               this.globalData.openId = res2.data.openid;
               this.globalData.userId = res2.data.openid;
+              if(this.globalData.userId){
+                this.globalData.isLogin = true;
+                console.log('user login')
+              }
             }
           })
         }
@@ -79,6 +83,7 @@ App({
     appSecret: '',
     sessionKey: null,
     openId: null,
-    userId: null
+    userId: null,
+    isLogin: false
   }
 })

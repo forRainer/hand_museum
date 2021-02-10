@@ -1,1 +1,12 @@
 /* pages/all/all.wxss */
+.add_button{
+  position: fixed;
+  width:70rpx;
+  height:70rpx;
+  bottom: 70rpx;
+  right: 70rpx;
+}
+
+.img{
+  width: 100%;
+ }

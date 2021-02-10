@@ -46,7 +46,7 @@
           </view>
         </view>
       </view>
-      <view wx:else>
+      <view wx:else bindtap="jumpToPreview">
         <a class="weui-media-box weui-media-box_appmsg">
           <view class="">
             <image class="weui-media-box__thumb" style="height: 50rpx;width: 50rpx;border-radius: 50rpx" src="../../image/lock.png" alt></image>
@@ -58,10 +58,8 @@
       </view>
     </view>
 
-    <view wx:if="{{!isPayed}}">
-      <view bindtap="jumpToPreview">
-        <image class="add_icon" src="../../image/buy.png"></image>
-      </view>
+    <view wx:if="{{!isPayed}}" bindtap="jumpToPreview">
+      <image class="add_icon" src="../../image/buy.png"></image>
     </view>
 
 

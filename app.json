@@ -4,9 +4,7 @@
     "pages/narrator/narrator",
     "pages/preview/preview",
     "pages/detail/detail",
-    "pages/index/index",
-    "pages/logs/logs",
-    "pages/mine/mine"
+    "pages/index/index"
   ],
   "window":{
     "backgroundTextStyle":"light",

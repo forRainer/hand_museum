@@ -1,4 +1,5 @@
 // pages/demo/demo.js
+const app = getApp()
 Page({
 
   /**
@@ -6,7 +7,11 @@ Page({
    */
   data: {
     area_count: 0,
-    area_list: 0
+    area_list: 0,
+    userInfo: {},
+    hasUserInfo: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    top_img: null
   },
 
   /**
@@ -14,7 +19,6 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var app = getApp();
     wx.request({
       url: app.globalData.server_address + "/all",
       data: {
@@ -27,11 +31,11 @@ Page({
         console.log(res.data)
         that.setData({
           area_count: res.data.count,
-          area_list: res.data.list
+          area_list: res.data.list,
+          top_img: res.data.top_img
         })
       }
     })
-
   },
 
   /**
@@ -41,11 +45,38 @@ Page({
 
   },
 
+  showPermissionModal: function() {
+    var that = this
+    if (app.globalData.userInfo) {
+      that.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+      console.log('has user info', that.data.hasUserInfo)
+    }
+    console.log('hasUserInfo', that.data.hasUserInfo)
+    console.log('canIUse', that.data.canIUse)
+    if (!that.data.hasUserInfo && that.data.canIUse) {
+      wx.showModal({
+        title: '未授权提醒',
+        content: '用户尚未授权，请先到“我的”页面点击“获取头像昵称”',
+        success: function (res) {
+          wx.switchTab({
+            url: '/pages/index/index'
+          })
+        }
+      })
+    }
+  },
+
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this
+    setTimeout(function() {
+      that.showPermissionModal();
+    }, 1000)
   },
 
   /**
@@ -88,5 +119,16 @@ Page({
     wx.navigateTo({
       url: '/pages/detail/detail?area_code='+e.currentTarget.dataset.code
     })
-  }
+  },
+
+  getUserInfo: function(e) {
+    console.log(e)
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
+    })
+  },
+
+
 })

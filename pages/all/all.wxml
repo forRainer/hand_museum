@@ -2,7 +2,15 @@
 <page>
   <view class="page">
     <view class="page__hd">
-      <image style="width: 750rpx; height: 300rpx" src="../../image/demo.png"></image>
+      <!--<image style="width: 750rpx; height: 300rpx" src="{{top_img}}"></image>-->
+      <swiper autoplay="true" interval="2000">
+        <swiper-item>
+          <image src='http://47.114.120.151/images/xuanchuanye.JPG' height="150" mode='widthFix' class='img' />
+        </swiper-item>
+        <swiper-item>
+          <image src='http://47.114.120.151/images/xuanchuanye2.JPG' height="150" mode='widthFix' class='img' />
+        </swiper-item>
+      </swiper>
     </view>
     <view class="weui-panel weui-panel__hd">全部景区</view>
     <view class="page__hd">
