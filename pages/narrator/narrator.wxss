@@ -3,12 +3,13 @@
 .audiosBox{
   width: 92%;
   margin: auto;
-  height: 120rpx;
+  height: 90rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #ffffff;
-  border-radius: 10rpx;
+  background:#ffffff;
+  z-index:0;
+  border-radius: 20rpx;
 }
 /*按钮大小  */
 .audioOpen{
