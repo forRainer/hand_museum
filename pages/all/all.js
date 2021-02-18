@@ -45,6 +45,7 @@ Page({
   },
 
   showPermissionModal: function() {
+    console.log('定时器唤醒')
     var that = this
     if (app.globalData.userInfo) {
       that.setData({
@@ -73,9 +74,12 @@ Page({
    */
   onShow: function () {
     var that = this
+    /**
     setTimeout(function() {
       that.showPermissionModal();
-    }, 1000)
+    }, 1500)
+    */
+
   },
 
   /**

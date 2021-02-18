@@ -75,7 +75,33 @@ App({
       }
     })
 
+    var that = this
+    setTimeout(function() {
+      that.showPermissionModal();
+    }, 1500)
   },
+  
+  showPermissionModal: function() {
+    console.log('定时器唤醒')
+    var that = this
+    if (that.globalData.userInfo) {
+      that.globalData.hasUserInfo = true
+    }
+    console.log('has user info', that.globalData.hasUserInfo)
+    console.log('canIUse', that.globalData.canIUse)
+    if (!that.globalData.hasUserInfo && that.globalData.canIUse) {
+      wx.showModal({
+        title: '未授权提醒',
+        content: '用户尚未授权，请先到“我的”页面点击“获取头像昵称”',
+        success: function (res) {
+          wx.switchTab({
+            url: '/pages/index/index'
+          })
+        }
+      })
+    }
+  },
+
   globalData: {
     userInfo: null,
     server_address: 'http://47.114.120.151',
@@ -84,6 +110,8 @@ App({
     sessionKey: null,
     openId: null,
     userId: null,
-    isLogin: false
+    isLogin: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    hasUserInfo: null
   }
 })

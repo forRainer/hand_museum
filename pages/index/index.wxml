@@ -3,9 +3,8 @@
   <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
     <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
 			<text class="userinfo-nickname">{{userInfo.nickName}}</text>
-			<text class="userinfo-nickname" style="font-size: 30rpx;">积分 50</text>
     </block>
   </view>
     <view class="weui-panel">
@@ -13,7 +12,7 @@
 				<view class="weui-media-box weui-media-box_small-appmsg">
 					<view class="weui-cells">
 						<a class="weui-cell weui-cell_active weui-cell_access weui-cell_example">
-							<view class="weui-cell__bd weui-cell_primary">
+							<view class="weui-cell__bd weui-cell_primary" bindtap="jumpToOrder">
 								<view>我的订单</view>
 							</view>
 							<text class="weui-cell__ft"></text>

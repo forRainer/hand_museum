@@ -39,7 +39,7 @@ Page({
     wx.request({
       url: app.globalData.server_address + '/narrator',
       data: {
-        area_code: 0,
+        area_code: that.data.area_code,
         narrator_code: that.data.narrator_code,
         user_id: app.globalData.userId
       },

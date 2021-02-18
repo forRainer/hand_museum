@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/all/all",
+    "pages/orders/orders",
     "pages/narrator/narrator",
     "pages/preview/preview",
     "pages/detail/detail",

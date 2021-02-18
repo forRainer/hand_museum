@@ -100,6 +100,7 @@ Page({
 
 
   insertOrder: function(){
+    var that = this
     // 再向后台发送订单
     wx.request({
       url: app.globalData.server_address + '/insert_order',
@@ -114,7 +115,7 @@ Page({
       },
       success: function(res) {
         console.log('insert_order', res)
-        pay_status = res.data.pay_status;
+        var pay_status = res.data.pay_status;
         wx.redirectTo({
           url: '/pages/narrator/narrator?pay_status=' + pay_status + '&area_code=' + that.data.area_code + '&narrator_code=' + that.data.narrator_code
         })
@@ -144,7 +145,7 @@ Page({
           paySign: res.data.paySign,
           success: function (res) {
             console.log('pay success', res)
-            this.insertOrder;
+            that.insertOrder();
             pay_status = 2
             wx.redirectTo({
               url: '/pages/narrator/narrator?pay_status=' + pay_status + '&area_code=' + that.data.area_code + '&narrator_code=' + that.data.narrator_code
@@ -153,6 +154,7 @@ Page({
           fail: function (res) {
             console.log('pay fail', res)
             pay_status = 0;
+            that.insertOrder();
           }
         })
       }

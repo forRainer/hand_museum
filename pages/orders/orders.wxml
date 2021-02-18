@@ -1,0 +1,54 @@
+<!--pages/orders/orders.wxml-->
+<view class="page">
+  <view class="page__bd page__bd_spacing" wx:for="{{order_count}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
+		<view class="weui-flex">
+			<view class="weui-flex__item" style="display: flex; justify-content: center;">
+        <image style="height: 150rpx; width: 150rpx; border-radius: 150rpx;" src="{{order_list[index].attraction_img}}"></image>
+      </view>
+    </view>
+    <view class="weui-flex" style="margin-bottom:15rpx">
+			<view class="weui-flex__item" style="display: flex; justify-content: center;">
+        <view style="opacity: 0.5;">{{order_list[index].attraction_name}}</view>
+      </view>
+    </view>
+    <view class="weui-flex" style="margin: 8rpx">
+      <view class="weui-flex__item" style="font-size: 27rpx; display: flex; justify-content: center; margin-top: 7rpx;">
+        讲解员：
+      </view>
+      <view class="weui-flex__item" style="font-size: 25rpx; display: flex; justify-content: center;">
+        <view>
+          <image style="height: 50rpx; width: 50rpx; border-radius: 50rpx;" src="{{order_list[index].narrator_img}}"></image>
+        </view>
+        <view style="font-size: 25rpx; display: flex; justify-content: center; margin-left: 10rpx; margin-top: 7rpx;">{{order_list[index].narrator_name}}</view>
+      </view>
+    </view>
+    <view class="weui-flex" style="margin: 5rpx">
+      <view class="weui-flex__item" style="font-size: 27rpx; display: flex; justify-content: center;">
+        下单时间：
+      </view>
+      <view class="weui-flex__item" style="font-size: 25rpx; display: flex; justify-content: center;">
+        {{order_list[index].time}}
+      </view>
+    </view>
+    <view class="weui-flex" style="margin: 5rpx">
+      <view class="weui-flex__item" style="font-size: 27rpx; display: flex; justify-content: center; margin-top: 5rpx;">
+        付款金额：
+      </view>
+      <view class="weui-flex__item" style="font-size: 30rpx; display: flex; justify-content: center; color: red;">
+        ￥{{order_list[index].price}}.00
+      </view>
+    </view>
+    <view class="weui-flex" style="margin: 5rpx">
+      <view class="weui-flex__item"></view>
+      <view class="weui-flex__item">
+        <view style="font-size: 25rpx; display: flex; justify-content: center;">
+          <button class="btn" hover-class="btn_hover" data-index="{{index}}" bindtap="jumpTo">进入讲解</button>
+        </view>
+      </view>
+    </view>
+    <view class="weui-panel__hd" style="margin-bottom: 20rpx;"></view>
+  </view>
+
+  
+
+</view>
