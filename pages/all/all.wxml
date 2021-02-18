@@ -11,7 +11,7 @@
         </swiper-item>
       </swiper>
     </view>
-    <view class="weui-panel weui-panel__hd">全部景区</view>
+    <view class="weui-panel weui-panel__hd" style="background:#ffffff00;z-index:0;">全部景区</view>
     <view class="page__hd">
       <a bindtap="jumpTo" class="weui-media-box weui-media-box_appmsg" wx:for="{{area_count}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-code="{{area_list[index].area_code}}">
         <view class="weui-media-box__hd">
