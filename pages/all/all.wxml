@@ -1,5 +1,7 @@
 <!--pages/demo/demo.wxml-->
 <page>
+  <image class='background' src="../../image/background.jpg" mode="aspectFill"></image>
+
   <view class="page">
     <view class="page__hd">
       <!--<image style="width: 750rpx; height: 300rpx" src="{{top_img}}"></image>-->
