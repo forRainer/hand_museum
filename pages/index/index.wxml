@@ -1,7 +1,9 @@
 <!--index.wxml-->
 <view class="page">
+	<image class='background' src="../../image/background.jpg" mode="aspectFill"></image>
+
   <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 点此授权 </button>
     <block wx:else>
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
 			<text class="userinfo-nickname">{{userInfo.nickName}}</text>
@@ -18,8 +20,8 @@
 							<text class="weui-cell__ft"></text>
 						</a>
 						<a class="weui-cell weui-cell_active weui-cell_access weui-cell_example">
-							<view class="weui-cell__bd weui-cell_primary">
-								<view>积分兑换</view>
+							<view class="weui-cell__bd weui-cell_primary" bindtap="jumpToAbout">
+								<view>关于我们</view>
 							</view>
 							<text class="weui-cell__ft"></text>
 						</a>

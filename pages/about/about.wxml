@@ -1,0 +1,32 @@
+<!--pages/about/about.wxml-->
+<view>
+  <view class="weui-flex" style="margin: auto">
+    <view class="weui-flex__item" style="font-size: 30rpx; display: flex; margin-top: 7rpx; justify-content: center;">
+      绍兴市海棠文化旅游发展有限公司
+    </view>
+  </view>
+  <view class="weui-flex" style="margin: auto">
+    <view class="weui-flex__item" style="font-size: 27rpx; display: flex; margin-top: 7rpx; justify-content: center;">
+      原：绍兴名人故居管理处
+    </view>
+  </view>
+  <view class="weui-flex" style="margin: auto">
+    <view class="weui-flex__item" style="font-size: 27rpx; display: flex; margin-top: 7rpx;padding-left: 60rpx; padding-right: 60rpx;">
+    　　公司下属景区包括：周恩来祖居、蔡元培故居、秋瑾故里、大通学堂、青藤书屋。下属博物馆包括：清廉馆、名人馆、徐渭艺术馆、师爷馆。
+    </view>
+  </view>
+  <view class="weui-flex">
+    <view class="weui-flex__item" style="display: flex; margin-top: 7rpx; justify-content: center;padding-right: 60rpx;" mode="widthFix">
+    　　<image src="{{img_url}}" style="width: 400rpx; height: 400rpx;" bindtap="previewImage"></image>
+    </view>
+  </view>
+  <view class="weui-flex">
+    <view class="weui-flex__item" style="display: flex; margin-top: 7rpx; justify-content: center; opacity: 0.5; font-size: 25rpx; padding-right: 45rpx;">
+    　　长按图片识别关注官方公众号
+    </view>
+  </view>
+
+  <view class="weui-footer weui-footer_fixed-bottom">
+      <view class="weui-footer__text">Coding by xuyulong</view>
+	</view>
+</view>

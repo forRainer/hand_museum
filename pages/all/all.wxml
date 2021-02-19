@@ -1,5 +1,6 @@
 <!--pages/demo/demo.wxml-->
 <page>
+  <official-account></official-account>
   <image class='background' src="../../image/background.jpg" mode="aspectFill"></image>
 
   <view class="page">
@@ -7,7 +8,7 @@
       <!--<image style="width: 750rpx; height: 300rpx" src="{{top_img}}"></image>-->
       <swiper autoplay="true" interval="2000" style="width: 100%; height: 350rpx">
         <swiper-item wx:for="{{top_img_list}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
-          <image src='{{item}}' mode='widthFix' class='img' />
+          <image src='{{item}}' mode='widthFix' class='img'/>
         </swiper-item>
       </swiper>
     </view>
@@ -15,11 +16,11 @@
     <view class="page__hd">
       <a bindtap="jumpTo" class="weui-media-box weui-media-box_appmsg" wx:for="{{area_count}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-code="{{area_list[index].area_code}}">
         <view class="weui-media-box__hd">
-          <image class="weui-media-box__thumb" src="{{area_list[index].img_url}}" alt></image>
+          <image class="weui-media-box__thumb" src="{{area_list[index].img_url}}" style="border-radius: 15rpx;" alt></image>
         </view>
         <view class="weui-media-box__bd">
           <h4 class="weui-media-box__title">{{area_list[index].name}}</h4>
-          <view class="weui-media-box__desc">{{area_list[index].brief_introduction}}</view>
+          <view class="" style="opacity: 0.7; font-size: 25rpx;">{{area_list[index].brief_introduction}}</view>
         </view>
       </a>
     </view>

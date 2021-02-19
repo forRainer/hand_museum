@@ -56,5 +56,10 @@ Page({
     wx.navigateTo({
       url: '../orders/orders'
     })
+  },
+  jumpToAbout: function() {
+    wx.navigateTo({
+      url: '../about/about'
+    })
   }
 })

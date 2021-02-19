@@ -1,5 +1,7 @@
 <!--pages/detail/detail.wxml-->
 <page>
+  <image class='background' src="../../image/background.jpg" mode="aspectFill"></image>
+
   <view class="page">
     <view class="weui-panel__hd" style="display: flex; justify-content: center;">
       <image style="height: 400rpx; width: 400rpx; border-radius: 400rpx;" src="{{area_img_url}}"></image>
@@ -12,7 +14,7 @@
         {{introduction}}
       </view>
     </view>
-    <view class="weui-panel weui-panel__hd">讲解员列表</view>
+    <view class="weui-panel weui-panel__hd" style="background:#ffffff00;z-index:0;">讲解员列表</view>
     <view class="page__hd">
       <a class="weui-media-box weui-media-box_appmsg" bindtap="jumpTo" wx:for="{{narrator_count}}" wx:for-index="index" wx:key="*this" data-code="{{narrator_list[index].narrator_code}}">
         <view class="weui-media-box__hd">
@@ -20,9 +22,9 @@
         </view>
         <view class="weui-media-box__bd">
           <h4 class="weui-media-box__title">{{narrator_list[index].name}}</h4>
-          <view class="weui-media-box__desc">{{narrator_list[index].title}}</view>
+          <view style="opacity: 0.7; font-size: 25rpx">{{narrator_list[index].title}}</view>
           <view style="display: flex;">
-            <view class="weui-media-box__desc">热度:　</view>
+            <view style="opacity: 0.7; font-size: 25rpx">热度:　</view>
             <image style="width: 40rpx;height: 40rpx;" src="../../image/fire.png"></image>
             <image style="width: 40rpx;height: 40rpx;" src="../../image/fire.png"></image>
             <image style="width: 40rpx;height: 40rpx;" src="../../image/fire.png"></image>

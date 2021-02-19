@@ -78,7 +78,7 @@ App({
     var that = this
     setTimeout(function() {
       that.showPermissionModal();
-    }, 1500)
+    }, 2000)
   },
   
   showPermissionModal: function() {
@@ -92,7 +92,7 @@ App({
     if (!that.globalData.hasUserInfo && that.globalData.canIUse) {
       wx.showModal({
         title: '未授权提醒',
-        content: '用户尚未授权，请先到“我的”页面点击“获取头像昵称”',
+        content: '用户尚未授权，请先到“我的”页面点击“点此授权”按钮',
         success: function (res) {
           wx.switchTab({
             url: '/pages/index/index'
