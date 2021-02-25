@@ -9,12 +9,12 @@
     <view class="weui-panel__hd" style="display: flex; justify-content: center;">
       <view class="weui-article__h2" style="font-size: 40rpx;">{{area_name}}</view>
     </view>
-    <view class="weui-panel__bd">
-      <view class="weui-article__p" style="font-size: 30rpx;">
+    <view class="weui-panel__bd" style="padding-top: 10rpx; padding-bottom: 0rpx;">
+      <view class="weui-article__p" style="font-size: 30rpx; margin:auto 45rpx 10rpx 45rpx;">
         {{introduction}}
       </view>
     </view>
-    <view class="weui-panel weui-panel__hd" style="background:#ffffff00;z-index:0;">讲解员列表</view>
+    <view class="weui-panel weui-panel__hd" style="background:#ffffff00;z-index:0; margin-top: 0rpx;">讲解员列表</view>
     <view class="page__hd">
       <a class="weui-media-box weui-media-box_appmsg" bindtap="jumpTo" wx:for="{{narrator_count}}" wx:for-index="index" wx:key="*this" data-code="{{narrator_list[index].narrator_code}}">
         <view class="weui-media-box__hd">

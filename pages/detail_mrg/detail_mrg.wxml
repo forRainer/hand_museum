@@ -1,67 +1,20 @@
-<!--pages/demo1/demo1.wxml-->
+<!--pages/detail/detail.wxml-->
 <page>
   <image class='background' src="../../image/background.jpg" mode="aspectFill"></image>
 
   <view class="page">
-      <view class="weui-panel__hd" style="padding-bottom: 0rpx;">
-        <a class="weui-media-box weui-media-box_appmsg">
-          <view class="weui-media-box__hd" style="height: 220rpx; width: 150rpx;">
-            <image class="weui-media-box__thumb" src="{{narrator.img_url}}" style="border-radius: 15rpx;" alt></image>
-          </view>
-          <view class="weui-media-box__bd">
-            <text style="font-size: 40rpx; opacity:1">草堂之声，雨润万物\n</text>
-            <text style="font-size: 30rpx; opacity:0.7">讲解时长{{total_duration}}分钟　讲解{{content_count}}条\n</text>
-            <text style="font-size: 35rpx; opacity:1">{{narrator.name}}\t</text>
-            <text style="font-size: 30rpx; opacity:0.7">\t{{narrator.title}}\n</text>
-            <text style="font-size: 30rpx; color: red; opacity:0.7">评分：{{narrator.score}}</text>
-          </view>
-        </a>
-      </view>
-
-    <view class="weui-panel__hd">
-      <h4 class="weui-media-box__title">讲解指南</h4>
+    <view class="weui-panel__hd" style="display: flex; justify-content: center;">
+      <image style="height: 400rpx; width: 400rpx; border-radius: 400rpx;" src="{{area_img_url}}"></image>
     </view>
-    <view class="weui-panel__hd" style="padding-top: 10rpx; padding-bottom: 10rpx; font-size: 25rpx;font-weight: 400;">
-        　　{{narrator.explain_overview}}
+    <view class="weui-panel__hd" style="display: flex; justify-content: center;">
+      <view class="weui-article__h2" style="font-size: 40rpx;">{{area_name}}</view>
     </view>
-    <view class="weui-panel__hd">
-        <h4 class="weui-media-box__title">讲解内容</h4>
-    </view>
-<!--
-      <view class="weui-panel__hd" wx:for="{{content_count}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
-      <view class="weui-media-box__title" style="color: red; margin-bottom: 15rpx;">{{index+1}} {{content_list[index].title}}</view>
-      <image style="width: 680rpx; height: 340rpx; border-radius: 20rpx;" src="{{content_list[index].title_img}}"></image>
-      <text style="font-size: 25rpx;" wx:if="{{index==0}}">试听\n</text>
-      <view wx:if="{{index==0 || isPayed}}">
-        <view class='audiosBox'>
-          <view class="audioOpen" bindtap="listenerButtonPlay"  data-index="{{index}}" wx:if="{{!content_list[index].is_open}}">
-            <image class='image_play' src="../../image/play.png" />
-          </view>
-        <view class="audioOpen" bindtap="listenerButtonPause" data-index="{{index}}" wx:if="{{content_list[index].is_open}}">
-          <image class='image_pause' src="../../image/pause.png" />
-        </view>
-          <view class='slid' style="margin-top: 35rpx">
-            <slider class="slider_1" bindchange="sliderChange" data-index="{{index}}"  block-size="12px" step="1" value="{{content_list[index].offset}}" max="{{content_list[index].max}}" selected-color="#4c9dee" />
-            <view>
-              <text class='times'>{{content_list[index].start_time}}</text>
-              <text class='times'>{{content_list[index].duration}}</text>
-            </view>
-          </view>
-        </view>
-      </view>
-      <view wx:else bindtap="jumpToPreview" class="audiosBox">
-        <a class="weui-media-box weui-media-box_appmsg">
-          <view class="">
-            <image class="weui-media-box__thumb" style="height: 50rpx;width: 50rpx;border-radius: 50rpx" src="../../image/lock.png" alt></image>
-          </view>
-          <view>
-            <text style="font-size: 30rpx; color: red; opacity:0.7">　点此购买解锁</text>
-          </view>
-        </a>
+    <view class="weui-panel__bd" style="padding-top: 10rpx; padding-bottom: 0rpx;">
+      <view class="weui-article__p" style="font-size: 30rpx; margin:auto 45rpx 10rpx 45rpx;">
+        {{introduction}}
       </view>
     </view>
--->
-
+    <view class="weui-panel weui-panel__hd" style="background:#ffffff00;z-index:0; margin-top: 0rpx;">历代名人</view>
     <view style="padding-left: 50rpx; padding-right: 10rpx;">
       <view wx:for="{{title_count}}" wx:for-index="index_1" wx:for-item="item_1" wx:key="*this">
         <view style="margin: 30rpx auto">
@@ -69,7 +22,7 @@
             <text style="font-weight: 500">{{content_list[index_1+1].title}}</text>
           </view>
         </view>
-        <view class="view_panel" style="display: flex; padding: 0; margin: 25rpx auto;" wx:for="{{content_list[index_1+1]['list']}}" wx:for-index="index_2" wx:for-item="item_2" wx:key="*this">
+        <view class="view_panel" style="display: flex; padding: 0; margin: 25rpx auto;" wx:for="{{content_list[index_1+1]['list']}}" wx:for-index="index_2" wx:for-item="item_2" wx:key="content_list">
           <view style="padding: 15rpx 5rpx 6rpx 10rpx;">
           <image src="{{item_2.title_img}}" style="width: 150rpx; height: 130rpx; border-radius: 20rpx;" bindtap="previewImage" data-index_1="{{index_1}}" data-index_2="{{index_2}}"></image>
         </view>
@@ -106,21 +59,12 @@
           </view>
         </view>
       </view>
-
-
     </view>
-
-
-    </view>
-
-
-
-
 
     <view wx:if="{{!isPayed}}" bindtap="jumpToPreview" >
       <image class="add_icon shadow" src="../../image/buy.png"></image>
     </view>
-
-
+    
+    </view>
   </view>
 </page>

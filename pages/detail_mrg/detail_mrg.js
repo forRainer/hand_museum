@@ -1,4 +1,4 @@
-// pages/demo1/demo1.js
+// pages/detail/detail.js
 var bgMusic = new Array()
 var wait_flag = new Array()
 const app = getApp()
@@ -9,9 +9,15 @@ Page({
    * 页面的初始数据
    */
   data: {
+    area_code: 0,
+    narrator_count: 0,
+    narrator_list: 0,
+    area_name: 0,
+    introduction: 0,
+    area_img_url: 0,
+
     isPayed: true,
     pay_status: null,
-    area_code: 0,
     narrator_code: 0,
     narrator:{
       name: 0,
@@ -31,17 +37,44 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log('special')
     var that = this;
     that.setData({
       area_code: options.area_code,
-      narrator_code: options.narrator_code,
       pay_status: options.pay_status
     })
+    var app = getApp();
+    wx.request({
+      url: app.globalData.server_address + '/detail_special',
+      data: {
+        area_code: that.data.area_code
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function(res) {
+        console.log('detail', res.data)
+        that.setData({
+          narrator_count: res.data.narrator_count,
+          narrator_list: res.data.narrator_list,
+          area_name: res.data.attraction_info.name,
+          introduction: res.data.attraction_info.introduction,
+          area_img_url: res.data.attraction_info.img_url
+        })
+      }
+    })
+
+    // 获取讲解列表
+    that.getMrgNarrator()
+  },
+
+  getMrgNarrator: function () {
+    var that = this
     wx.request({
       url: app.globalData.server_address + '/narrator',
       data: {
         area_code: that.data.area_code,
-        narrator_code: that.data.narrator_code,
+        narrator_code: 0,
         user_id: app.globalData.userId
       },
       header: {
@@ -72,7 +105,6 @@ Page({
           bgMusic[i] = wx.createInnerAudioContext();
           wait_flag[i] = false;
         }
-        console.log('this_data', that.data)
       }
     })
   },
@@ -101,6 +133,7 @@ Page({
         duration: 1500  
       })
     }
+    console.log('this_data', this.data)
   },
 
   /**
@@ -147,6 +180,12 @@ Page({
 
   },
 
+  jumpTo: function (e) {
+    wx.navigateTo({
+      url: ''
+    })
+  },
+
   // 播放
   listenerButtonPlay: function (e) {
     console.log('listenerButtonPlay')
@@ -161,7 +200,7 @@ Page({
     bgMusic[id].epname = '绍兴古城' + id
     console.log('x21900', index_1, index_2, content_list_tmp)
     bgMusic[id].src = content_list_tmp[index_1]['list'][index_2].audio_url;
-
+    console.log(bgMusic[id].paused)
     bgMusic[id].onTimeUpdate(() => {
       console.log(bgMusic[id].paused)
       //bgMusic.duration总时长  bgMusic.currentTime当前进度

@@ -4,7 +4,7 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": false,
+    "urlCheck": true,
     "es6": true,
     "enhance": false,
     "postcss": true,
@@ -23,6 +23,7 @@
     "compileHotReLoad": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
+    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -41,7 +42,7 @@
   "compileType": "miniprogram",
   "libVersion": "2.14.4",
   "appid": "wxe156f5b26c652e7f",
-  "projectname": "绍兴古城线上讲解",
+  "projectname": "%E7%BB%8D%E5%85%B4%E5%8F%A4%E5%9F%8E%E7%BA%BF%E4%B8%8A%E8%AE%B2%E8%A7%A3",
   "debugOptions": {
     "hidedInDevtools": []
   },

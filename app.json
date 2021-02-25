@@ -6,6 +6,7 @@
     "pages/narrator/narrator",
     "pages/preview/preview",
     "pages/detail/detail",
+    "pages/detail_mrg/detail_mrg",
     "pages/index/index"
   ],
   "window":{

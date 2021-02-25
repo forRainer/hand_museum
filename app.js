@@ -2,19 +2,28 @@
 App({
   onLaunch: function () {
     // 展示本地存储能力
+    var that = this
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
     wx.request({
-      url: this.globalData.server_address + '/get_app_info',
+      url: that.globalData.server_address + '/get_app_info',
       success: (res) => {
         console.log('get_app_info', res)
-        this.globalData.appId = res.data.app_id;
-        this.globalData.appSecret = res.data.app_secret;
+        that.globalData.appId = res.data.app_id;
+        that.globalData.appSecret = res.data.app_secret;
+        that.mylogin();
       }
     })
 
+    setTimeout(function() {
+      that.showPermissionModal();
+    }, 2000)
+  },
+  
+  mylogin: function(){
+    var that = this
     // 登录
     wx.login({
       success: res => {
@@ -22,16 +31,17 @@ App({
         console.log('login', res);
         if(res.code){
           wx.request({
-            url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + this.globalData.appId + '&secret=' + this.globalData.appSecret + '&js_code=' + res.code + '&grant_type=authorization_code',
+            url: that.globalData.server_address + '/jscode2session?appid=' + this.globalData.appId + '&secret=' + this.globalData.appSecret + '&js_code=' + res.code + '&grant_type=authorization_code',
             success: (res2) => {
               console.log('jscode2session', res2)
-              this.globalData.sessionKey = res2.data.session_key;
-              this.globalData.openId = res2.data.openid;
-              this.globalData.userId = res2.data.openid;
-              if(this.globalData.userId){
-                this.globalData.isLogin = true;
+              that.globalData.sessionKey = res2.data.session_key;
+              that.globalData.openId = res2.data.openid;
+              that.globalData.userId = res2.data.openid;
+              if(that.globalData.userId){
+                that.globalData.isLogin = true;
                 console.log('user login')
               }
+              console.log('globalData', that.globalData)
             }
           })
         }
@@ -43,14 +53,14 @@ App({
               // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
               wx.getUserInfo({
                 success: res => {
-                  this.globalData.userInfo = res.userInfo
+                  that.globalData.userInfo = res.userInfo
                   console.log('getUserInfo', res)
                   // 可以将 res 发送给后台解码出 unionId
                   wx.request({
-                    url: this.globalData.server_address + '/get_unionId',
+                    url: that.globalData.server_address + '/get_unionId',
                     data: {
-                      appId: this.globalData.appId,
-                      sessionKey: this.globalData.sessionKey,
+                      appId: that.globalData.appId,
+                      sessionKey: that.globalData.sessionKey,
                       encryptedData: res.encryptedData,
                       iv: res.iv
                     },
@@ -63,24 +73,18 @@ App({
                   })
                   // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
                   // 所以此处加入 callback 以防止这种情况
-                  if (this.userInfoReadyCallback) {
-                    this.userInfoReadyCallback(res)
+                  if (that.userInfoReadyCallback) {
+                    that.userInfoReadyCallback(res)
                   }
                 }
               })
             }
           }
         })
-      
       }
     })
-
-    var that = this
-    setTimeout(function() {
-      that.showPermissionModal();
-    }, 2000)
   },
-  
+
   showPermissionModal: function() {
     console.log('定时器唤醒')
     var that = this
@@ -104,7 +108,7 @@ App({
 
   globalData: {
     userInfo: null,
-    server_address: 'http://47.114.120.151',
+    server_address: 'https://onlineexpound.sxhttour.com',
     appId: '',
     appSecret: '',
     sessionKey: null,

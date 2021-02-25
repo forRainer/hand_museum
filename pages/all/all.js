@@ -118,9 +118,16 @@ Page({
   },
 
   jumpTo: function (e) {
-    wx.navigateTo({
-      url: '/pages/detail/detail?area_code='+e.currentTarget.dataset.code
-    })
+    var code = e.currentTarget.dataset.code
+    if(code == 6) {
+      wx.navigateTo({
+        url: '/pages/detail_mrg/detail_mrg?area_code='+code
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/detail/detail?area_code='+code
+      })
+    }
   },
 
   getUserInfo: function(e) {

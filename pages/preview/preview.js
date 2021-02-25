@@ -93,11 +93,23 @@ Page({
   },
 
   jumpBack: function (e) {
-    wx.redirectTo({
-      url: '/pages/narrator/narrator?pay_status=' + e.currentTarget.dataset.flag + '&area_code=' + this.data.area_code + '&narrator_code=' + this.data.narrator_code
-    })
+    var that = this
+    var pay_status = e.currentTarget.dataset.flag
+    that.jumpToLastPage(pay_status)
   },
 
+  jumpToLastPage: function (pay_status) {
+    var that = this
+    if(that.data.area_code == 6 && that.data.narrator_code == 0){
+      wx.redirectTo({
+        url: '/pages/detail_mrg/detail_mrg?pay_status=' + pay_status + '&area_code=' + that.data.area_code + '&narrator_code=' + that.data.narrator_code
+      })
+    } else {
+      wx.redirectTo({
+        url: '/pages/narrator/narrator?pay_status=' + pay_status + '&area_code=' + this.data.area_code + '&narrator_code=' + this.data.narrator_code
+      })
+    }
+  },
 
   insertOrder: function(){
     var that = this
@@ -147,14 +159,11 @@ Page({
             console.log('pay success', res)
             that.insertOrder();
             pay_status = 2
-            wx.redirectTo({
-              url: '/pages/narrator/narrator?pay_status=' + pay_status + '&area_code=' + that.data.area_code + '&narrator_code=' + that.data.narrator_code
-            })
+            that.jumpToLastPage(pay_status)
           },
           fail: function (res) {
             console.log('pay fail', res)
             pay_status = 0;
-            that.insertOrder();
           }
         })
       }
