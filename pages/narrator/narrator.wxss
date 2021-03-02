@@ -120,7 +120,7 @@
 }
 
 .shadow {
-  box-shadow:2rpx 3rpx 3rpx 4rpx rgba(87, 86, 86, 0.288);
+  box-shadow:0rpx 0rpx 3rpx 5rpx rgba(87, 86, 86, 0.288);
 }
 
 .view_panel {

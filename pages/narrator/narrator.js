@@ -2,6 +2,9 @@
 var bgMusic = new Array()
 var wait_flag = new Array()
 const app = getApp()
+var current_index_1 = 1
+var current_index_2 = 1
+var current_music_id = 0
 
 Page({
 
@@ -10,7 +13,7 @@ Page({
    */
   data: {
     isPayed: true,
-    pay_status: null,
+    pay_status: -1,
     area_code: 0,
     narrator_code: 0,
     narrator:{
@@ -23,7 +26,7 @@ Page({
     },
     content_count: 0,
     content_list: 0,
-    total_duration: null,
+    total_duration: 0,
     title_count: 0
   },
 
@@ -69,7 +72,7 @@ Page({
           total_duration: res.data.total_duration
         })
         for(var i = 0; i < that.data.content_count; ++i){
-          bgMusic[i] = wx.createInnerAudioContext();
+          bgMusic[i] = 0;
           wait_flag[i] = false;
         }
         console.log('this_data', that.data)
@@ -156,6 +159,24 @@ Page({
     var id = e.currentTarget.dataset.id;
     var that = this;
     var content_list_tmp = that.data.content_list
+
+    if(bgMusic[id] == 0){
+      bgMusic[id] = wx.createInnerAudioContext();
+    }
+
+    // 把当前正在播放的停了
+    content_list_tmp[current_index_1]['list'][current_index_2].is_open = false
+    if(bgMusic[current_music_id] != 0) {
+      bgMusic[current_music_id].pause()
+    }
+    console.log(bgMusic[current_music_id].paused)
+    that.setData({
+      content_list: content_list_tmp
+    })
+    current_index_1 = index_1;
+    current_index_2 = index_2;
+    current_music_id = id;
+
     //bug ios 播放时必须加title 不然会报错导致音乐不播放
     bgMusic[id].title = '绍兴古城' + id
     bgMusic[id].epname = '绍兴古城' + id
@@ -224,7 +245,9 @@ Page({
   listenerButtonStop(){
     var that = this
     for(var i = 0; i < that.data.content_count; ++i){
-      bgMusic[i].stop();
+      if(bgMusic[i] != 0){
+        bgMusic[i].stop();
+      }
     }
   },
   // 进度条拖拽

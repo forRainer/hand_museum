@@ -9,6 +9,11 @@
     "pages/detail_mrg/detail_mrg",
     "pages/index/index"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于景区导航"
+    }
+  },
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",

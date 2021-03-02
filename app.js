@@ -106,6 +106,48 @@ App({
     }
   },
 
+  callMap: function(name, address, jingdu, weidu){
+    wx.getLocation({
+      //定位类型 wgs84, gcj02
+      // wgs84 返回 gps 坐标，gcj02 返回可用于wx.openLocation的坐标
+      type: 'gcj02',
+      //获取位置成功
+      success: function (res) {
+        console.log(res)  //获取的的当前位置的详细信息
+        wx.openLocation({
+          //当前经纬度
+          latitude: weidu,  // 纬度
+          longitude: jingdu,  // 经度
+          //缩放级别默认18,缩放比例为5-18
+          scale: 18,
+          //位置名
+          name: name,
+          //详细地址
+          address: address,
+          //成功打印信息
+          success: function (res) {
+              
+          },
+          //失败打印信息
+          fail: function (err) {
+            wx.showToast({
+              title: '调用地图失败，请返回重试',
+            })
+          },
+        })
+  
+      },
+      //获取位置失败
+      fail: function (err) {
+        console.log("获取位置信息失败，请返回重试")
+      },
+      //接口调用结束的回调函数（调用成功、失败都会执行）
+      complete: function (info) {
+        console.log("完成")
+      },
+    })
+  },
+
   globalData: {
     userInfo: null,
     server_address: 'https://onlineexpound.sxhttour.com',

@@ -1,7 +1,11 @@
 // pages/detail/detail.js
 var bgMusic = new Array()
 var wait_flag = new Array()
+var folded = new Array()
 const app = getApp()
+var current_index_1 = 1
+var current_index_2 = 1
+var current_music_id = 0
 
 Page({
 
@@ -17,7 +21,7 @@ Page({
     area_img_url: 0,
 
     isPayed: true,
-    pay_status: null,
+    pay_status: -1,
     narrator_code: 0,
     narrator:{
       name: 0,
@@ -29,8 +33,11 @@ Page({
     },
     content_count: 0,
     content_list: 0,
-    total_duration: null,
-    title_count: 0
+    total_duration: 0,
+    title_count: 0,
+    address: 0,
+    lng: 0,
+    lat: 0
   },
 
   /**
@@ -59,7 +66,10 @@ Page({
           narrator_list: res.data.narrator_list,
           area_name: res.data.attraction_info.name,
           introduction: res.data.attraction_info.introduction,
-          area_img_url: res.data.attraction_info.img_url
+          area_img_url: res.data.attraction_info.img_url,
+          address: res.data.attraction_info.address,
+          lng: res.data.attraction_info.lng,
+          lat: res.data.attraction_info.lat
         })
       }
     })
@@ -102,8 +112,15 @@ Page({
           total_duration: res.data.total_duration
         })
         for(var i = 0; i < that.data.content_count; ++i){
-          bgMusic[i] = wx.createInnerAudioContext();
+          bgMusic[i] = 0;
           wait_flag[i] = false;
+        }
+        var floded_tmp = new Array()
+        for(var j = 0; j < that.data.title_count; ++j){
+          floded_tmp[j] = true
+          that.setData({
+            folded: floded_tmp
+          })
         }
       }
     })
@@ -195,6 +212,24 @@ Page({
     var id = e.currentTarget.dataset.id;
     var that = this;
     var content_list_tmp = that.data.content_list
+
+    if(bgMusic[id] == 0){
+      bgMusic[id] = wx.createInnerAudioContext();
+    }
+
+    // 把当前正在播放的停了
+    content_list_tmp[current_index_1]['list'][current_index_2].is_open = false
+    if(bgMusic[current_music_id] != 0) {
+      bgMusic[current_music_id].pause()
+    }
+    console.log(bgMusic[current_music_id].paused)
+    that.setData({
+      content_list: content_list_tmp
+    })
+    current_index_1 = index_1;
+    current_index_2 = index_2;
+    current_music_id = id;
+
     //bug ios 播放时必须加title 不然会报错导致音乐不播放
     bgMusic[id].title = '绍兴古城' + id
     bgMusic[id].epname = '绍兴古城' + id
@@ -263,7 +298,9 @@ Page({
   listenerButtonStop(){
     var that = this
     for(var i = 0; i < that.data.content_count; ++i){
-      bgMusic[i].stop();
+      if(bgMusic[i] != 0){
+        bgMusic[i].stop();
+      }
     }
   },
   // 进度条拖拽
@@ -300,5 +337,31 @@ Page({
     wx.previewImage({
       urls: [this.data.content_list[index_1]['list'][index_2].title_img]
     })
+  },
+
+  flodChange: function (e) {
+    var that = this
+    var index_1 = e.currentTarget.dataset.index_1;
+    var floded_tmp = that.data.folded;
+    for(var j = 0; j < that.data.title_count; ++j){
+      if(j == index_1){
+        floded_tmp[index_1] = !floded_tmp[index_1];
+      } else {
+        floded_tmp[j] = true
+      }
+    }
+    that.setData({
+      folded: floded_tmp
+    })
+    console.log('floded', that.data.folded)
+  },
+
+  //点击地址调用地图
+  call_map: function () {
+    var name = this.data.area_name;
+    var address = this.data.address;
+    var jingdu = this.data.lng;
+    var weidu = this.data.lat;
+    app.callMap(name, address, jingdu, weidu);
   }
 })
