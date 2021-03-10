@@ -6,10 +6,10 @@
       <view class="weui-panel__hd" style="padding-bottom: 0rpx;">
         <a class="weui-media-box weui-media-box_appmsg">
           <view class="weui-media-box__hd" style="height: 220rpx; width: 150rpx;">
-            <image class="weui-media-box__thumb" src="{{narrator.img_url}}" style="border-radius: 15rpx;" alt></image>
+            <image class="weui-media-box__thumb" src="{{narrator.img_url}}" style="border-radius: 15rpx;" bindtap="previewImage" data-src="{{narrator.img_url}}" alt></image>
           </view>
           <view class="weui-media-box__bd">
-            <text style="font-size: 40rpx; opacity:1">草堂之声，雨润万物\n</text>
+            <text style="font-size: 40rpx; opacity:1">{{narrator.slogan}}\n</text>
             <text style="font-size: 30rpx; opacity:0.7">讲解时长{{total_duration}}分钟　讲解{{content_count}}条\n</text>
             <text style="font-size: 35rpx; opacity:1">{{narrator.name}}\t</text>
             <text style="font-size: 30rpx; opacity:0.7">\t{{narrator.title}}\n</text>
@@ -71,7 +71,7 @@
         </view>
         <view class="view_panel" style="display: flex; padding: 0; margin: 25rpx auto;" wx:for="{{content_list[index_1+1]['list']}}" wx:for-index="index_2" wx:for-item="item_2" wx:key="*this">
           <view style="padding: 15rpx 5rpx 6rpx 10rpx;">
-          <image src="{{item_2.title_img}}" style="width: 150rpx; height: 130rpx; border-radius: 20rpx;" bindtap="previewImage" data-index_1="{{index_1}}" data-index_2="{{index_2}}"></image>
+          <image src="{{item_2.title_img}}" style="width: 150rpx; height: 130rpx; border-radius: 20rpx;" bindtap="previewImage" data-src="{{item_2.title_img}}"></image>
         </view>
         <view style="display: flex;flex-direction: column;align-items: center;justify-content: center;">
           <view style="font-size: 25rpx; margin: 0;width: 100%; padding-left: 80rpx;" wx:if="{{item_2.free}}">{{item_2.title}}(试听)</view>
@@ -113,14 +113,18 @@
 
     </view>
 
-
-
-
-
-    <view wx:if="{{!isPayed}}" bindtap="jumpToPreview" >
-      <image class="add_icon shadow" src="../../image/buy.png"></image>
+  <view style="margin: 45rpx auto;">　</view>
+  <view wx:if="{{!isPayed}}" class="buy_bar">
+    <view style="text-align:center; width: 50%;align-items: center;justify-content: center; display:flex; ">
+      <view>购买定制书签支持一下</view>
     </view>
-
+    <view style="text-align:center; width: 20%;align-items: center;justify-content: center; display:flex; color: red;font-size: 50rpx">
+      <view>￥{{narrator.price}}</view>
+    </view>
+    <view style="text-align:center; width: 30%;align-items: center;justify-content: center; display:flex;" bindtap="jumpToPreview">
+      <view style="background-color: #ba6652; color: white; width: 70%; height: 60%;border-radius: 20rpx;align-items: center;text-align:center;justify-content: center;display:flex;">立即购买</view>
+    </view>
+  </view>
 
   </view>
 </page>

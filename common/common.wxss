@@ -1,0 +1,26 @@
+.buy_bar{
+  position: fixed;
+  display: flex;
+  height: 100rpx;
+  width: 100%;
+  bottom: 0rpx;
+  background-color: #ffffff;
+  opacity: 1;
+  z-index: 1;
+  scale: 0.9;
+  border-width: 1rpx;
+  border-color: grey;
+  border-style: solid;
+  border-radius: 10rpx;
+}
+
+.add_icon{
+  position: fixed;
+  width:80rpx;
+  height:80rpx;
+  bottom: 100rpx;
+  right: 5rpx;
+  opacity: 1;
+  z-index: 1;
+  scale: 0.9;
+}

@@ -1,5 +1,6 @@
 /* pages/detail_mrg/detail_mrg.wxss */
 @import '/pages/narrator/narrator.wxss';
+@import '/common/common.wxss';
 .background-img{
   background-color: white;
   border: 3rpx solid #faca82;
@@ -21,20 +22,4 @@
 .more_less_img{
   width: 40rpx;
   height: 40rpx;
-}
-
-.buy_bar{
-  position: fixed;
-  display: flex;
-  height: 90rpx;
-  width: 100%;
-  bottom: 0rpx;
-  background-color: #ffffff;
-  opacity: 1;
-  z-index: 1;
-  scale: 0.9;
-  border-width: 1rpx;
-  border-color: grey;
-  border-style: solid;
-  border-radius: 10rpx;
 }

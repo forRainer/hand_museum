@@ -58,6 +58,7 @@ Page({
         let narrator_price = 'narrator.price';
         let narrator_score = 'narrator.score';
         let narrator_explain_overview = 'narrator.explain_overview';
+        let narrator_slogan = 'narrator.slogan'
         that.setData({
           [narrator_name]: res.data.narrator_info.name,
           [narrator_title]: res.data.narrator_info.title,
@@ -65,6 +66,7 @@ Page({
           [narrator_price]: res.data.narrator_info.price,
           [narrator_score]: res.data.narrator_info.score,
           [narrator_explain_overview]: res.data.narrator_info.explain_overview,
+          [narrator_slogan]: res.data.narrator_info.slogan,
           title_count: res.data.title_count,
           content_count: res.data.content_count,
           content_list: res.data.content_list,
@@ -279,10 +281,9 @@ Page({
   },
 
   previewImage: function (e) {
-    var index_1 = e.currentTarget.dataset.index_1+1;
-    var index_2 = e.currentTarget.dataset.index_2;
+    var src = e.currentTarget.dataset.src;
     wx.previewImage({
-      urls: [this.data.content_list[index_1]['list'][index_2].title_img]
+      urls: [src]
     })
   }
 })

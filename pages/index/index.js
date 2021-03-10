@@ -61,5 +61,9 @@ Page({
     wx.navigateTo({
       url: '../about/about'
     })
-  }
+  },
+  jumpToMap: function() {
+    wx.navigateTo({
+      url: '../map/map'
+    })  }
 })

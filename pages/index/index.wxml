@@ -25,8 +25,18 @@
 							</view>
 							<text class="weui-cell__ft"></text>
 						</a>
+						<!--<a class="weui-cell weui-cell_active weui-cell_access weui-cell_example">
+							<view class="weui-cell__bd weui-cell_primary" bindtap="jumpToMap">
+								<view>地图</view>
+							</view>
+							<text class="weui-cell__ft"></text>
+						</a>-->
 					</view>
 				</view>
 			</view>
+		</view>
+
+		<view class="weui-footer weui-footer_fixed-bottom" style="padding-bottom: 40rpx;">
+    	<view class="weui-footer__text">海棠文化 | xuyulong提供技术支持</view>
 		</view>
 </view>
