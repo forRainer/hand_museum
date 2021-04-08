@@ -121,8 +121,10 @@
     <view style="text-align:center; width: 20%;align-items: center;justify-content: center; display:flex; color: red;font-size: 50rpx">
       <view>￥{{narrator.price}}</view>
     </view>
-    <view style="text-align:center; width: 30%;align-items: center;justify-content: center; display:flex;" bindtap="jumpToPreview">
-      <view style="background-color: #ba6652; color: white; width: 70%; height: 60%;border-radius: 20rpx;align-items: center;text-align:center;justify-content: center;display:flex;">立即购买</view>
+    <view style="text-align:center; width: 30%;align-items: center;justify-content: center; display:flex;">
+      <!--<view style="background-color: #ba6652; color: white; width: 70%; height: 60%;border-radius: 20rpx;align-items: center;text-align:center;justify-content: center;display:flex;">立即购买</view>-->
+      <button wx:if="{{!is_user_info_ready}}" size="mini" style="background-color: #ba6652; color: white; width: 77%; height: 60%;border-radius: 20rpx;align-items: center;text-align:center;justify-content: center;display:flex;" open-type="getUserInfo" bindgetuserinfo="getUserInfo">购买</button>
+      <button wx:else size="mini" style="background-color: #ba6652; color: white; width: 77%; height: 60%;border-radius: 20rpx;align-items: center;text-align:center;justify-content: center;display:flex;" bindtap="jumpToPreview">购买</button>
     </view>
   </view>
 

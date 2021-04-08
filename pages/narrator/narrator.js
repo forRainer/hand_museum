@@ -27,7 +27,8 @@ Page({
     content_count: 0,
     content_list: 0,
     total_duration: 0,
-    title_count: 0
+    title_count: 0,
+    is_user_info_ready: app.userInfoReady()
   },
 
   /**
@@ -38,7 +39,8 @@ Page({
     that.setData({
       area_code: options.area_code,
       narrator_code: options.narrator_code,
-      pay_status: options.pay_status
+      pay_status: options.pay_status,
+      is_user_info_ready: app.userInfoReady()
     })
     wx.request({
       url: app.globalData.server_address + '/narrator',
@@ -167,6 +169,7 @@ Page({
     }
 
     // 把当前正在播放的停了
+    // console.log('debug', content_list_tmp[current_index_1]['list'][current_index_2])
     content_list_tmp[current_index_1]['list'][current_index_2].is_open = false
     if(bgMusic[current_music_id] != 0) {
       bgMusic[current_music_id].pause()
@@ -184,6 +187,7 @@ Page({
     bgMusic[id].epname = '绍兴古城' + id
     console.log('x21900', index_1, index_2, content_list_tmp)
     bgMusic[id].src = content_list_tmp[index_1]['list'][index_2].audio_url;
+    console.log('bgMusic信息', bgMusic[id])
 
     bgMusic[id].onTimeUpdate(() => {
       console.log(bgMusic[id].paused)
@@ -285,5 +289,32 @@ Page({
     wx.previewImage({
       urls: [src]
     })
+  },
+
+  getUserInfo: function(e) {
+    var that = this
+    console.log('getUserInfo', app.userInfoReady())
+    if(!app.userInfoReady()){
+      console.log(e)
+      app.globalData.userInfo = e.detail.userInfo
+      app.onLaunch()
+      wx.showToast({
+        title: '加载中',
+        icon: 'loading',
+        duration: 2000
+      })
+      setTimeout(function(){
+        that.setData({
+          is_user_info_ready: app.userInfoReady()
+        });
+        console.log('is user info ready', that.data.is_user_info_ready);
+        that.jumpToPreview(0)
+      }, 2000)
+    }else{
+      that.setData({
+        is_user_info_ready: app.userInfoReady()
+      })
+      that.jumpToPreview(0)
+    }
   }
 })

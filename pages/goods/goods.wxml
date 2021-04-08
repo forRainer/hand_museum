@@ -1,0 +1,149 @@
+<!--pages/goods/goods.wxml-->
+<view>
+    <view class="swiper-tab" style="width: 100%;" style="position: fixed; z-index: 3; background-color: white;">
+        <view class="swiper-tab-list {{0 == current_tab ? 'on' : 'off'}}" bindtap="viewJump" style="" data-tab="0">商品</view>
+        <view class="swiper-tab-list {{1 == current_tab ? 'on' : 'off'}}" bindtap="viewJump" style="" data-tab="1">详情</view>
+    </view>
+    <view class="swiper-tab"> </view>
+    <scroll-view scroll-into-view="{{to_view}}" scroll-y="true" scroll-with-animation="true" style="height: {{screen_height}}px">
+        <!-- 商品 -->
+        <view id="goods">
+            <swiper autoplay="true" interval="2000" style="width: 100%; height: 414rpx">
+                <swiper-item>
+                    <image src='../../image/demo11.jpg' mode='aspectFill' class='img'/>
+                </swiper-item>
+                <swiper-item>
+                    <image src='../../image/demo11.jpg' mode='aspectFill' class='img'/>
+                </swiper-item>
+            </swiper>
+        </view>
+
+        <!-- 价格 -->
+        <view style="height: 70rpx; display: flex; flex-direction: column; justify-content: center;">
+            <view style="color: #811222; font-weight: 900; font-size: 35rpx; padding-left: 20rpx;">
+                ￥29.00
+            </view>
+        </view>
+
+        <!-- 标题 -->
+        <view style="height: 70rpx; display: flex; flex-direction: column; ">
+            <view style="font-weight: 700; font-size: 30rpx; padding-left: 20rpx;">
+                海棠文化 City Walk
+            </view>
+        </view>
+
+        <!-- 规格 -->
+        <view>
+            <view style="height: 18rpx; background-color: #f1f1f1"></view>
+            <view style="font-size: 30rpx;display: flex; align-items: center; padding: 15rpx 20rpx;" bindtap="showSize">
+                <view style="color: #8b8b8b;">
+                    规格
+                </view>
+                <view style="padding-left: 20rpx;">
+                    请选择规格
+                </view>
+            </view>
+            <view style="height: 18rpx; background-color: #f1f1f1"></view>
+        </view>
+
+        <!-- 产品详情 -->
+        <view id="detail">
+            <view style="padding: 20rpx; font-size: 35rpx; font-weight: 900" >产品详情</view>
+            <view style="padding-left: 20rpx; padding-right: 20rpx;">
+                <image src="https://onlineexpound.sxhttour.com/images/article/article.jpg" mode="widthFix" style="width: 100%"></image>
+            </view>
+        </view>
+    </scroll-view>
+    <view style="height: 110rpx"></view>
+</view>
+
+
+<view class="buy_bar" style="height: 110rpx">
+    <view style="text-align:center; width: 30%;align-items: center; display:flex; padding-left: 40rpx">
+        <image src="../../image/not like.png" style="width: 30%;" mode="widthFix">喜欢</image>
+    </view>
+    <view style="text-align:center; width: 70%;align-items: center;justify-content: center; display:flex; padding-right: 20rpx;">
+        <view class="add_view">
+            加入购物车
+        </view>
+        <view class="buy_view" bindtap="showSizeOrPermission">
+            立即购买
+        </view>
+    </view>
+</view>
+
+
+<view class="size_bar" animation='{{animation}}'>
+    <!-- 规格详情 -->
+    <view style="display:flex">
+        <view style="padding-left: 40rpx; padding-top: 30rpx">
+            <image src='../../image/demo11.jpg' mode='aspectFill' class="img" style="height: 144rpx; width: 220rpx"/>
+        </view>
+        <view>
+            <view style="color: #811222; font-weight: 900; font-size: 35rpx; padding-left: 20rpx;padding-top: 70rpx">
+                ￥29.00
+            </view>
+            <view style="padding-left: 20rpx; opacity: 0.7; font-size: 30rpx;">
+                库存11件
+            </view>
+        </view>
+        <view style="padding-left: 260rpx; padding-top: 30rpx" bindtap="hideSize">
+            <image src='../../image/cancel.png' mode='aspectFill' class="img" style="height: 35rpx; width: 35rpx"/>
+        </view>
+    </view>
+    <view style="padding-left: 40rpx; padding-top: 15rpx; font-weight: 500; font-size: 35rpx;">
+        日期
+    </view>
+    <view style="padding-left: 45rpx; padding-top: 10rpx; display: flex;">
+        <view class="size_detail">3月1日</view>
+        <view class="size_detail">3月11日</view>
+    </view>
+    <view style="padding-left: 40rpx; padding-top: 15rpx; font-weight: 500; font-size: 35rpx;">
+        时间
+    </view>
+    <view style="padding-left: 45rpx; padding-top: 10rpx; display: flex;">
+        <view class="size_detail">8:30</view>
+        <view class="size_detail">13:30</view>
+    </view>
+    <view style="display: flex; align-items: center; padding-left: 40rpx; padding-top: 20rpx;">
+        <view style="font-weight: 500; font-size: 35rpx; width: 60%; display: flex; align-items:">
+            数量
+        </view>
+        <view style="display: flex; align-items: center; margin-left: 80rpx">
+            <view style="display: flex; align-items: center;justify-content: center;" class="bak_color radius_left">
+                <image src='../../image/min.png' mode='aspectFill' class="img" style="height: 55rpx; width: 55rpx"></image>
+            </view>
+            <view style="display: flex; align-items: center;justify-content: center;height: 55rpx; width: 60rpx;margin: auto 4rpx" class="bak_color">
+                1
+            </view>
+            <view style="display: flex; align-items: center;justify-content: center;" class="bak_color radius_right">
+                <image src='../../image/add.png' mode='aspectFill' class="img" style="height: 55rpx; width: 55rpx"></image>
+            </view>
+        </view>
+    </view>
+    <view style="display: flex; align-items: center; justify-content: center; margin-top: 30rpx;">
+        <view class="view_button_class size_buy_button" style="background-color: #989898">
+            加入购物车
+        </view>
+        <view class="view_button_class size_buy_button" style="background-color: #c08d94;">
+            立即购买
+        </view>
+    </view>
+</view>
+
+<view class="permission_bar" animation='{{animation_p}}'>
+    <view style="font-weight: 700; font-size: 35rpx;display: flex; align-items: center;justify-content: center; margin-top: 30rpx;">
+        权限申请
+    </view>
+    <view style="display: flex; align-items: center;justify-content: center; padding-top: 20rpx;">
+        小程序希望获取您的微信头像和昵称，请允许。
+    </view>
+    <view style="display: flex; align-items: center; justify-content: center; margin-top: 30rpx;">
+        <view style="display: flex; align-items: center; justify-content: center; width: 50%;">
+            <button bindtap="hidePermission">拒绝</button>
+        </view>
+        <view style="display: flex; align-items: center; justify-content: center; width: 50%;">
+            <button type="primary" bindtap="getUserProfile">允许</button>
+        </view>
+    </view>
+</view>

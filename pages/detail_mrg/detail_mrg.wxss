@@ -23,3 +23,48 @@
   width: 40rpx;
   height: 40rpx;
 }
+
+.swiper-tab{  
+  width: 100%;  
+  border-bottom: 1px solid #dadada;
+  line-height: 80rpx;
+}  
+
+.swiper-tab-list{  
+  font-size: 30rpx;  
+  display: inline-block;  
+  width: 16%;  
+  text-align:center;
+}  
+
+.on{
+ border-bottom: 5rpx solid #63b4ad;
+ font-weight: 600;
+}
+
+.off{
+  opacity: 0.6;
+}
+
+.swiper-box{ 
+  display: block; 
+  height: 100%; 
+  width: 100%; 
+  overflow: hidden;
+}
+
+.swiper-items{
+  height: 100%;
+}
+
+.scroll-views{
+  height: 100%;
+}
+
+.show{
+  display: block;
+}
+
+.hide{
+  display: none;
+}

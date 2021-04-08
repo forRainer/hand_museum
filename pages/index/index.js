@@ -43,6 +43,13 @@ Page({
       })
     }
   },
+  onShow: function(){
+    var that = this
+    that.setData({
+      userInfo: app.globalData.userInfo,
+      hasUserInfo: app.globalData.hasUserInfo
+    })
+  },
   getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -65,5 +72,23 @@ Page({
   jumpToMap: function() {
     wx.navigateTo({
       url: '../map/map'
-    })  }
+    })
+  },
+  getUserProfile: function() {
+    var that = this
+    console.log('user info', app.globalData.userInfo)
+    wx.getUserProfile({
+      desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+      success: (res) => {
+        app.globalData.userInfo = res.userInfo
+        app.globalData.hasUserInfo = true
+        that.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+        wx.setStorageSync('userInfo',app.globalData.userInfo)
+        app.onLaunch()
+      }
+    })
+  }
 })

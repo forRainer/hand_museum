@@ -111,7 +111,7 @@ Page({
     }
   },
 
-  insertOrder: function(){
+  insertOrder: function(order_id){
     var that = this
     // 再向后台发送订单
     wx.request({
@@ -120,7 +120,8 @@ Page({
         area_code: that.data.area_code,
         narrator_code: that.data.narrator_code,
         user_id: app.globalData.userId,
-        price: that.data.price
+        price: that.data.price,
+        order_id: order_id
       },
       header: {
         'content-type': 'application/json' // 默认值
@@ -155,9 +156,9 @@ Page({
           package: res.data.package,
           signType: res.data.signType,
           paySign: res.data.paySign,
-          success: function (res) {
-            console.log('pay success', res)
-            that.insertOrder();
+          success: function (res2) {
+            console.log('pay success', res2)
+            that.insertOrder(res.data.timeStamp)
             pay_status = 2
             that.jumpToLastPage(pay_status)
           },

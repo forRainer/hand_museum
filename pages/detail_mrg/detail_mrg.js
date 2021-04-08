@@ -37,7 +37,10 @@ Page({
     title_count: 0,
     address: 0,
     lng: 0,
-    lat: 0
+    lat: 0,
+
+    current_tab: 0,
+    is_user_info_ready: false
   },
 
   /**
@@ -69,7 +72,8 @@ Page({
           area_img_url: res.data.attraction_info.img_url,
           address: res.data.attraction_info.address,
           lng: res.data.attraction_info.lng,
-          lat: res.data.attraction_info.lat
+          lat: res.data.attraction_info.lat,
+          is_user_info_ready: app.userInfoReady()
         })
       }
     })
@@ -199,7 +203,7 @@ Page({
 
   jumpTo: function (e) {
     wx.navigateTo({
-      url: ''
+      url: '/pages/narrator/narrator?area_code='+this.data.area_code+'&narrator_code=' + e.currentTarget.dataset.code
     })
   },
 
@@ -363,5 +367,39 @@ Page({
     var jingdu = this.data.lng;
     var weidu = this.data.lat;
     app.callMap(name, address, jingdu, weidu);
+  },
+
+  swichNav: function (e) {
+    var tab = e.currentTarget.dataset.tab
+    this.setData({
+      current_tab: tab
+    })
+  },
+
+  getUserInfo: function(e) {
+    var that = this
+    console.log('getUserInfo', app.userInfoReady())
+    if(!app.userInfoReady()){
+      console.log(e)
+      app.globalData.userInfo = e.detail.userInfo
+      app.onLaunch()
+      wx.showToast({
+        title: '加载中',
+        icon: 'loading',
+        duration: 2000
+      })
+      setTimeout(function(){
+        that.setData({
+          is_user_info_ready: app.userInfoReady()
+        });
+        console.log('is user info ready', that.data.is_user_info_ready);
+        that.jumpToPreview(0)
+      }, 2000)
+    }else{
+      that.setData({
+        is_user_info_ready: app.userInfoReady()
+      })
+      that.jumpToPreview(0)
+    }
   }
 })

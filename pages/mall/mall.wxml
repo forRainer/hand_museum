@@ -1,0 +1,39 @@
+<!--pages/mall/mall.wxml-->
+<view>
+    <view class="weui-search-bar" style="z-index: 1">
+        <view class="weui-search-bar__form">
+            <!-- 搜索框 -->
+            <view class="weui-search-bar__box">
+                <icon class="in-box" type="search" size="20"></icon>
+                <input type="text" class="weui-search-bar__input" placeholder="请输入搜索内容"/>
+            </view>
+        </view>
+      <!-- 搜索按钮,调用搜索查询方法 -->
+        <view class="cancel-btn" bindtap='方法名a'>搜索</view>
+    </view>
+    <view style="height: 117rpx">恭喜李花现了华点</view>
+
+    <scroll-view style="z-index: 0">
+        <!-- 此处为列表正文 -->
+        <view style="width: 100%; display: flex; margin: 10rpx 25rpx" bindtap="jumpToGoods" wx:for="{{goods_list}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-id="{{item.goods_id}}">
+            <view style="padding: 10rpx">
+                <image style="width: 204rpx; height: 252rpx;border-radius: 15rpx;" src="{{item.img}}"></image>
+            </view>
+            <view style="padding: 10rpx; margin-left: 10rpx">
+                <view class="vertical-center" style="font-size:40rpx; font-weight: 600;">{{item.goods_name}}</view>
+                <view class="vertical-center" style="font-size:30rpx;color: #9c9ca4">最近：{{item.time}}</view>
+                <view class="vertical-center" style="justify-content: center;font-size:28rpx; color: #6d7996; border: 3rpx solid #6d7996; border-radius: 30rpx; width: max-content;margin-top: 9rpx;padding: 0 10rpx;">
+                    {{item.tips}}
+                </view>
+                <view style="display: flex; flex-direction:row; align-items: center;padding-top: 17rpx">
+                    <view style="color: #ea416b;">￥</view>
+                    <view style="font-size: 40rpx; font-weight: 500; color: #ea416b;">{{item.min_price}}</view>
+                    <view style="color: #9c9ca4; margin-left: 10rpx">起</view>
+                </view>
+            </view>
+        </view>
+
+    </scroll-view>
+
+
+</view>

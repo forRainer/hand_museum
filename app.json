@@ -8,7 +8,8 @@
     "pages/preview/preview",
     "pages/detail/detail",
     "pages/detail_mrg/detail_mrg",
-    
+    "pages/mall/mall",
+    "pages/goods/goods",
     "pages/index/index"
   ],
   "permission": {
@@ -28,6 +29,12 @@
       "text": "主页",
       "iconPath": "image/index.png",
       "selectedIconPath": "image/_index.png"
+    },
+    {
+      "pagePath": "pages/mall/mall",
+      "text": "商城",
+      "iconPath": "image/mall2.png",
+      "selectedIconPath": "image/_mall2.png"
     },
     {
       "pagePath": "pages/index/index",

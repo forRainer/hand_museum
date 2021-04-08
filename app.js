@@ -3,10 +3,10 @@ App({
   onLaunch: function () {
     // 展示本地存储能力
     var that = this
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
+    //var logs = wx.getStorageSync('logs') || []
+    //logs.unshift(Date.now())
+    //wx.setStorageSync('logs', logs)
+    that.globalData.userInfo = wx.getStorageSync('userInfo')
     wx.request({
       url: that.globalData.server_address + '/get_app_info',
       success: (res) => {
@@ -17,9 +17,6 @@ App({
       }
     })
 
-    setTimeout(function() {
-      that.showPermissionModal();
-    }, 2000)
   },
   
   mylogin: function(){
@@ -47,11 +44,12 @@ App({
         }
 
         // 获取用户信息，必须放在登录回调内部
-        wx.getSetting({
+        /*wx.getSetting({
           success: res => {
             if (res.authSetting['scope.userInfo']) {
-              // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-              wx.getUserInfo({
+              // 已经授权，可以直接调用 getUserProfile 获取头像昵称，不会弹框
+              wx.getUserProfile({
+                desc: '用于完善会员资料',
                 success: res => {
                   that.globalData.userInfo = res.userInfo
                   console.log('getUserInfo', res)
@@ -81,10 +79,12 @@ App({
             }
           }
         })
+        */
       }
     })
   },
 
+  // 目前不使用
   showPermissionModal: function() {
     console.log('定时器唤醒')
     var that = this
@@ -93,7 +93,7 @@ App({
     }
     console.log('has user info', that.globalData.hasUserInfo)
     console.log('canIUse', that.globalData.canIUse)
-    if (!that.globalData.hasUserInfo && that.globalData.canIUse) {
+    if (!that.userInfoReady()) {
       wx.showModal({
         title: '未授权提醒',
         content: '用户尚未授权，请先到“我的”页面点击“点此授权”按钮',
@@ -103,6 +103,19 @@ App({
           })
         }
       })
+    }
+  },
+
+  userInfoReady: function() {
+    var that = this
+    if (that.globalData.userInfo) {
+      that.globalData.hasUserInfo = true
+    }
+    console.log('globalData', that.globalData)
+    if (!that.globalData.hasUserInfo && that.globalData.canIUse){
+      return false
+    }else{
+      return true
     }
   },
 
