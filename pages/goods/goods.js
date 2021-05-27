@@ -16,7 +16,15 @@ Page({
     to_view: null,
     scroll_list: ["goods", "detail"],
 
-    goods_id: 0
+    goods_id: 0,
+    img_list: 0,
+    spec_list: 0,
+    goods_info: 0,
+
+    spec_index_0: 0,
+    spec_index_1: 0,
+
+    num: 0
   },
 
   /**
@@ -30,22 +38,62 @@ Page({
       is_user_info_ready: app.userInfoReady()
     })
 
+    // 获取图片
     that.data.goods_id = options.goods_id
     wx.request({
-      url: app.globalData.server_address + "/mall/get_goods_list",
+      url: app.globalData.server_address + "/mall/get_goods_img",
       data: {
+        goods_id: that.data.goods_id
       },
       header: {
         'content-type': 'application/json' // 默认值
       },
       success: function(res) {
-        console.log('/mall/get_goods_list', res.data)
+        console.log('/mall/get_goods_img', res.data)
         that.setData({
-          goods_list: res.data.list
+          img_list: res.data.img_list
         })
       }
     })
 
+    // 获取规格
+    wx.request({
+      url: app.globalData.server_address + "/mall/get_goods_spec",
+      data: {
+        goods_id: that.data.goods_id
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function(res) {
+        console.log('/mall/get_goods_spec', res.data)
+        var num = 0
+        if(res.data.spec_list[0]['list'][0].stock > 0){
+          num = 1
+        }
+        that.setData({
+          spec_list: res.data.spec_list,
+          num: num
+        })
+      }
+    })
+
+    //获取基本信息
+    wx.request({
+      url: app.globalData.server_address + "/mall/get_goods_info",
+      data: {
+        goods_id: that.data.goods_id
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function(res) {
+        console.log('/mall/get_goods_info', res.data)
+        that.setData({
+          goods_info: res.data
+        })
+      }
+    })
   },
 
   /**
@@ -146,11 +194,29 @@ Page({
   },
 
   showPermission: function(e) {
-    console.log('showPermission')
     var that = this
-    that.animation_p.translate(0, -util.getPx(300)).step()
-    that.setData({
-      animation_p: that.animation_p.export(),
+    console.log('user info', app.globalData.userInfo)
+    wx.getUserProfile({
+      desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+      success: (res) => {
+        app.globalData.userInfo = res.userInfo
+        app.globalData.hasUserInfo = true
+        wx.setStorageSync('userInfo',app.globalData.userInfo)
+        app.onLaunch()
+        wx.showToast({
+          title: '同步中',
+          icon: 'loading',
+          duration: 2000
+        })
+        setTimeout(function(){
+          that.setData({
+            is_user_info_ready: app.userInfoReady()
+          });
+          that.showSize(0)
+          that.hidePermission(0)
+          console.log('is user info ready', that.data.is_user_info_ready);
+        }, 2000)  
+      }
     })
   },
 
@@ -229,6 +295,88 @@ Page({
       })
       that.hidePermission(0)
     }
+  },
 
+  previewImg: function(e){
+    var that = this
+    var index = e.currentTarget.dataset.index
+    wx.previewImage({
+      current: that.data.img_list[index], // 当前显示图片的http链接
+      urls: that.data.img_list // 需要预览的图片http链接列表
+    })
+  },
+
+  chooseSpec0: function(e){
+    var that = this
+    var index_0 = e.currentTarget.dataset.index_0
+    var index_1 = that.data.spec_index_1
+    var num = 0
+    if(that.data.spec_list[index_0]['list'][index_1].stock>0){
+      num = 1
+    }
+    that.setData({
+      spec_index_0: index_0,
+      num: num
+    })
+  },
+
+  chooseSpec1: function(e){
+    var that = this
+    var index_1 = e.currentTarget.dataset.index_1
+    var index_0 = that.data.spec_index_0
+    var num = 0
+    if(that.data.spec_list[index_0]['list'][index_1].stock>0){
+      num = 1
+    }
+    that.setData({
+      spec_index_1: index_1,
+      num: num
+    })
+  },
+
+  add: function(e){
+    var that = this
+    var index_1 = that.data.spec_index_1
+    var index_0 = that.data.spec_index_0
+    if(that.data.num < that.data.spec_list[index_0]['list'][index_1].stock){
+      that.setData({
+        num: that.data.num + 1
+      })
+    }
+  },
+
+  min: function(e){
+    var that = this
+    if(that.data.num > 1){
+      that.setData({
+        num: that.data.num - 1
+      })
+    }
+  },
+
+  jumpToConfirm: function(e){
+    var that = this
+    var num = that.data.num
+    if(num==0){
+      wx.showToast({  
+        title: '数量不能为0',  
+        icon: 'none',  
+        duration: 1200  
+      })
+      return
+    }
+    var goods_id = that.data.goods_id
+    var index_1 = that.data.spec_index_1
+    var index_0 = that.data.spec_index_0
+    var spec_id_0 = that.data.spec_list[0]['list'][index_0].spec_id
+    var spec_id_1 = that.data.spec_list[1]['list'][index_1].spec_id
+    var goods_name = that.data.goods_info.goods_name
+    var spec_value_0 = that.data.spec_list[0]['list'][index_0].value
+    var spec_value_1 = that.data.spec_list[1]['list'][index_1].value
+    var price = num*that.data.spec_list[1]['list'][index_1].price
+    console.log('jumpToConfirm')
+    wx.navigateTo({
+      url: '/pages/goods_confirm_tickets/goods_confirm_tickets?goods_id='+goods_id+'&spec_id_0='+spec_id_0+'&spec_id_1='+spec_id_1+'&num='+num+'&goods_name='+goods_name+'&spec_value_0='+spec_value_0+'&spec_value_1='+spec_value_1+'&price='+price
+    })
   }
 })

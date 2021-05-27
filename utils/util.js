@@ -45,8 +45,32 @@ function getPx(rpx){
   return rpx/(750/winWidth);
 }
 
+function verifyTel(tel){
+  if (!(/^1[34578]\d{9}$/.test(tel))) {
+    return false
+  }
+  return true
+}
+
+function verifyIdcard(idcard){
+  if (!(/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(idcard))) {
+    return false
+  }
+  return true
+}
+
+function verifyCnname(name){
+  if (!(/^[\u4E00-\u9FA5A-Za-z]+$/.test(name))) {
+    return false
+  }
+  return true
+}
+
 module.exports = {
   formatTime: formatTime,
   formatRichText: formatRichText,
-  getPx: getPx
+  getPx: getPx,
+  verifyTel: verifyTel,
+  verifyIdcard: verifyIdcard,
+  verifyCnname: verifyCnname
 }

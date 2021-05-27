@@ -10,7 +10,9 @@
     "pages/detail_mrg/detail_mrg",
     "pages/mall/mall",
     "pages/goods/goods",
-    "pages/index/index"
+    "pages/index/index",
+    "pages/goods_confirm_tickets/goods_confirm_tickets",
+    "pages/goods_tickets_use/goods_tickets_use"
   ],
   "permission": {
     "scope.userLocation": {

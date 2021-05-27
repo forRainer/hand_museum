@@ -78,7 +78,7 @@
 
 .add_view{
     text-align:center; width: 50%;align-items: center;justify-content: center; display:flex;
-    background-color: #333333;
+    background-color: #989898;
     color: white;
     height: 80%;
     border-bottom-left-radius: 50rpx;
@@ -94,4 +94,14 @@
     border-bottom-right-radius: 50rpx;
     border-top-right-radius: 50rpx;
     font-size: small;
+}
+
+.spec_select{
+    background-color: #fef8f8;
+    color: #ce6d4a;
+    border: 2rpx solid #ce6d4a;
+}
+
+.spec_unselect{
+    
 }

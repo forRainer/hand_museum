@@ -1,0 +1,45 @@
+/* pages/goods_tickets_use/goods_tickets_use.wxss */
+@import "../../common/common.wxss";
+page{
+    background: #ececea;
+    width: 100%;
+    height: 100%;
+}
+
+.mod-text{
+    writing-mode:vertical-rl;
+    border-bottom-left-radius: 15rpx;
+    border-top-left-radius: 15rpx;
+    background-color: #323333;
+    color: white;
+    border: 2rpx solid #323333;
+}
+
+.tickets-container {
+    background-color: white;
+    width: 80%;
+    margin-top: 30rpx;
+}
+
+.tickets-note {
+    background-image: radial-gradient(circle at right bottom,#ececea 20rpx, transparent 20rpx),
+                        radial-gradient(circle at left bottom,#ececea 20rpx, transparent 20rpx);
+    border-bottom: 4rpx solid #ececea;
+    border-top-right-radius: 20rpx;
+    border-top-left-radius: 20rpx;
+}
+
+.tickets-box {
+    background-image: radial-gradient(circle at right top,#ececea 20rpx, transparent 20rpx),
+                        radial-gradient(circle at right bottom,#ececea 20rpx, transparent 20rpx),
+                        radial-gradient(circle at left top,#ececea 20rpx, transparent 20rpx),
+                        radial-gradient(circle at left bottom,#ececea 20rpx, transparent 20rpx);
+    border-bottom: 4rpx solid #ececea;
+}
+
+.tickets-info {
+    background-image: radial-gradient(circle at right top,#ececea 20rpx, transparent 20rpx),
+                        radial-gradient(circle at left top,#ececea 20rpx, transparent 20rpx);
+    border-bottom-right-radius: 20rpx;
+    border-bottom-left-radius: 20rpx;
+}

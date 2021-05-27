@@ -1,6 +1,6 @@
 <!--pages/orders/orders.wxml-->
-<view class="page">
-  <image class='background' src="../../image/background.jpg" mode="aspectFill"></image>
+
+  
 <!--
   <view class="page__bd page__bd_spacing" wx:for="{{order_count}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
 		<view class="weui-flex">
@@ -51,7 +51,16 @@
     <view class="weui-panel__hd" style="margin-bottom: 20rpx;"></view>
   </view>
 -->
-  <view class="weui-panel__hd" wx:for="{{order_count}}" wx:for-index="index" wx:for-item="item" wx:key="*this" style="padding: 0rpx; margin: 0rpx; font-weight: 400">
+
+<view class="swiper-tab" style="width: 100%;" style="position: fixed; z-index: 3; background-color: white;">
+    <view class="swiper-tab-list {{0 == current_tab ? 'on' : 'off'}}" bindtap="changeTab" style="" data-tab="0">讲解订单</view>
+    <view class="swiper-tab-list {{1 == current_tab ? 'on' : 'off'}}" bindtap="changeTab" style="" data-tab="1">商城订单</view>
+</view>
+<view class="swiper-tab"> </view>
+
+<!-- 讲解的商品订单 -->
+<view wx:if="{{current_tab == 0}}">
+  <view wx:for="{{order_count}}" wx:for-index="index" wx:for-item="item" wx:key="*this" style="padding: 0rpx; font-weight: 400; background-color: white; margin: 20rpx 15rpx; border-radius: 20rpx;">
     <a class="weui-media-box weui-media-box_appmsg">
       <view class="weui-media-box__hd" style="height: 150rpx; width: 150rpx; padding: 0; display: flex;">
         <image style="height: 150rpx; width: 150rpx; border-radius: 150rpx;" src="{{order_list[index].attraction_img}}"></image>
@@ -85,9 +94,8 @@
             订单金额：
           </view>
           <view class="weui-flex__item" style="font-size: 30rpx; display: flex; color: red;padding-left: 11rpx">
-          ￥{{order_list[index].price}}.00
-          </view>          
-
+            ￥{{order_list[index].price}}.00
+          </view>
         </view>
         <view class="weui-flex" style="margin: auto">
           <view class="weui-flex__item">
@@ -99,6 +107,50 @@
       </view>
     </a>
   </view>
-  
-
 </view>
+
+  
+<!-- 商城的商品订单 -->
+<view style="width: 100%;" class="horizontal-center" wx:if="{{current_tab == 1}}">
+<!-- 在此循环 -->
+  <view style="width: 96%; height: 361rpx; background-color: white; border-radius: 20rpx; margin: 20rpx auto auto auto;" wx:for="{{mall_order_list}}" wx:for-index="index" wx:for-item="item" wx:key="out_trade_no">
+    <view style="height: 25%" class="vertical-center">
+      <view style="width: 60%; padding-left: 25rpx; font-size: 35rpx; font-weight: 600">{{item.desc_json.goods_name}}</view>
+      <view style="width: 40%; color: #8b8b8b; font-weight: 25rpx;text-align:right; padding-right: 10rpx">{{item.status_desc}}</view>
+    </view>
+    <view style="display: flex; width: 100%; height: 50%;">
+      <view style="width: 30%; height: 100%;padding-left: 25rpx">
+        <image style="width: 180rpx; height: 180rpx; border-radius: 10rpx" src="{{item.img}}">
+        </image>
+      </view>
+      <view style="width: 70%">
+        <view style="color: #8b8b8b;font-size: 28rpx;">
+          规格：{{item.desc_json.spec_value_0}} {{item.desc_json.spec_value_1}}
+        </view>
+        <view style="color: #8b8b8b;font-size: 28rpx;">
+          数量：{{item.desc_json.num}}
+        </view>
+        <view style="color: #8b8b8b;font-size: 28rpx;">
+          下单时间：{{item.time}}
+        </view>
+        <view style="color: #8b8b8b;font-size: 28rpx;">
+          订单编号：{{item.out_trade_no}}
+        </view>
+      </view>
+    </view>
+    <view style="display: flex; width: 100%; height: 25%;" class="vertical-center">
+      <view style="color: #8b8b8b;padding-left: 25rpx;width: 52%" class="vertical-center">
+        总价：<text style="color: red">{{item.price}}元</text>
+      </view>
+      <view wx:if='{{item.status == 0}}' class="horizontal-center refund-view" hover-class="tap-view" data-index="{{index}}" bindtap="refundOrder">
+        退款
+      </view>
+      <view style="width: 3%"></view>
+      <view wx:if='{{item.status == 0}}' class="horizontal-center use-view" hover-class="tap-view" bindtap="jumpToTicketsUse" data-index="{{index}}">
+        使用
+      </view>
+    </view>
+  </view>
+</view>
+
+

@@ -1,0 +1,97 @@
+<!--pages/goods_confirm_tickets/goods_confirm_tickets.wxml-->
+<view>
+    <view style="padding:5rpx 20rpx; background-color: white; margin: 20rpx auto">
+        <view class='vertical-center' style="font-weight: 600; font-size: 45rpx;">
+            {{goods_name}}
+        </view>
+        <view class="vertical-center" style="font-size:35rpx; color: #9c9ca4">
+            {{spec_value_0}} {{spec_value_1}}
+        </view>
+        <view class="vertical-center" style="font-size:35rpx; color: #9c9ca4">
+            数量：{{num}}
+        </view>
+    </view>
+
+    <view style="padding:5rpx 20rpx; background-color: white; margin: 20rpx auto" >
+        <view class="vertical-center" style="color: #9c9ca4; font-size:30rpx;">联系人</view>
+        <view class="vertical-center" style="display:flex;margin: 10rpx auto;">
+            <view class="weui-cell__hd"><label class="weui-label" style="font-size:35rpx; margin: 10rpx auto">姓名</label></view>
+            <input 
+                class="weui-input" 
+                type="text" 
+                placeholder="请输入姓名" 
+                placeholder-class="weui-input__placeholder"
+                value="{{contacts}}"
+                bindblur="inputContacts"
+            />
+        </view>
+        <view class="vertical-center" style="display:flex;margin: 10rpx auto;">
+            <view class="weui-cell__hd"><label class="weui-label" style="font-size:35rpx; margin: 10rpx auto">手机号</label></view>
+            <input 
+                class="weui-input" 
+                type="number" 
+                placeholder="请输入手机号" 
+                placeholder-class="weui-input__placeholder"
+                value="{{tel}}"
+                bindblur="inputTel"
+            />
+        </view>
+    </view>
+
+    <view style="padding:5rpx 20rpx; background-color: white; margin: 20rpx auto" wx:for="{{num}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
+        <view class="vertical-center" style="color: #9c9ca4; font-size:30rpx;">游玩人{{index+1}}</view>
+        <view class="vertical-center" style="display:flex;margin: 10rpx auto;">
+            <view class="weui-cell__hd"><label class="weui-label" style="font-size:35rpx; margin: 10rpx auto">姓名</label></view>
+            <input 
+                class="weui-input"
+                type="text"
+                placeholder="请输入姓名" 
+                placeholder-class="weui-input__placeholder"
+                data-index='{{index}}'
+                value="{{visitor_list[index].name}}"
+                bindblur="inputName"
+            />
+        </view>
+        <view class="vertical-center" style="display:flex;margin: 10rpx auto;">
+            <view class="weui-cell__hd"><label class="weui-label" style="font-size:35rpx; margin: 10rpx auto">身份证号</label></view>
+            <input 
+                class="weui-input" 
+                type="idcard" 
+                placeholder="请输入身份证号" 
+                placeholder-class="weui-input__placeholder"
+                data-index='{{index}}'
+                value="{{visitor_list[index].idcard}}"
+                bindblur="inputIdcard"
+            />
+        </view>
+    </view>
+</view>
+
+<view style="padding:5rpx 20rpx; background-color: white; margin: 20rpx auto" wx:if="{{attraction_list!=null}}">
+    <view class="vertical-center" style="color: #9c9ca4; font-size:30rpx;">选择语音讲解(活动开始后生效)</view>
+    <view class="vertical-center" style="display:flex;margin: 10rpx auto;" wx:for="{{attraction_list}}" wx:for-index="attraction_index" wx:for-item="attraction" wx:key="attraction_code">
+        <view class="weui-cell__hd"><label class="weui-label" style="font-size:35rpx; margin: 10rpx auto">{{attraction['attraction_name']}}</label></view>
+        <picker mode="selector" range="{{attraction['narrator_list']}}" range-key="narrator_name" value="{{index}}" bindchange="bindPickerChange" data-attraction_index="{{attraction_index}}">
+            <view class="picker" style="width: 400rpx">{{select_attraction[attraction_index].narrator_name}}</view>
+        </picker>
+    </view>
+</view>
+<view style="width: 100%; height: 110rpx">
+</view>
+<view class="buy_bar" style="height: 110rpx">
+    <view style="width: 60%; display: flex">
+        <view class="vertical-center" style="margin: auto 15rpx">
+            合计:
+        </view>
+        <view class="vertical-center" style="color: #c55a64; font-size: 25rpx">
+            ￥
+        </view>
+        <view class="vertical-center" style="margin: auto 10rpx; color: #c55a64; font-size: 45rpx">
+            {{price}}
+        </view>
+    </view>
+
+    <view class="vertical-center buy_button" bindtap="goPay">
+        去支付
+    </view>
+</view>

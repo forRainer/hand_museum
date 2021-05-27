@@ -9,11 +9,11 @@
             <image class="weui-media-box__thumb" src="{{narrator.img_url}}" style="border-radius: 15rpx;" bindtap="previewImage" data-src="{{narrator.img_url}}" alt></image>
           </view>
           <view class="weui-media-box__bd">
-            <text style="font-size: 40rpx; opacity:1">{{narrator.slogan}}\n</text>
+            <text style="font-size: 35rpx; opacity:1">{{narrator.name}}\n</text>
             <text style="font-size: 30rpx; opacity:0.7">讲解时长{{total_duration}}分钟　讲解{{content_count}}条\n</text>
-            <text style="font-size: 35rpx; opacity:1">{{narrator.name}}\t</text>
-            <text style="font-size: 30rpx; opacity:0.7">\t{{narrator.title}}\n</text>
-            <text style="font-size: 30rpx; color: red; opacity:0.7">评分：{{narrator.score}}</text>
+            <text wx:if="{{narrator.title!=''}}" style="font-size: 30rpx; opacity:0.7">\t{{narrator.title}}\n</text>
+            <text style="font-size: 40rpx; opacity:1">{{narrator.slogan}}\n</text>
+            <!--<text style="font-size: 30rpx; color: red; opacity:0.7">评分：{{narrator.score}}</text>-->
           </view>
         </a>
       </view>

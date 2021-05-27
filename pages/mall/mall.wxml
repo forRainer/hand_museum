@@ -21,7 +21,7 @@
             </view>
             <view style="padding: 10rpx; margin-left: 10rpx">
                 <view class="vertical-center" style="font-size:40rpx; font-weight: 600;">{{item.goods_name}}</view>
-                <view class="vertical-center" style="font-size:30rpx;color: #9c9ca4">最近：{{item.time}}</view>
+                <view class="vertical-center" style="font-size:30rpx;color: #9c9ca4">{{item.time}}</view>
                 <view class="vertical-center" style="justify-content: center;font-size:28rpx; color: #6d7996; border: 3rpx solid #6d7996; border-radius: 30rpx; width: max-content;margin-top: 9rpx;padding: 0 10rpx;">
                     {{item.tips}}
                 </view>

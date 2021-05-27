@@ -41,3 +41,8 @@
   border-radius: 20rpx;
   border: 3rpx solid #faca82;
 }
+
+.vertical-center {
+  display: flex;
+  align-items: center;
+}

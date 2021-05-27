@@ -1,0 +1,52 @@
+<!--pages/goods_tickets_use/goods_tickets_use.wxml-->
+<view style="width: 100%;display: flex;justify-content: center;align-items: center;">
+    <view class="tickets-container">
+        <view style="width: 100%; justify-content: center; font-size: 40rpx; font-weight: 600; padding: 10rpx 0rpx;" class="vertical-center tickets-note">
+            凭以下票据消费
+        </view>
+        <view style="width: 100%; justify-content: center; padding: 10rpx 0rpx;" class="vertical-center tickets-box" wx:for="{{tickets_list}}" wx:for-index="index" wx:for-item="item" wx:key="desc">
+            <view class="mod-text vertical-center" style="height: 400rpx;justify-content: center;">{{item.desc}}</view>
+            <view style="justify-content: center;border: 2rpx solid #323333;" class="vertical-center">
+                <image style="width: 400rpx; height: 400rpx;" src="{{item.img}}"></image>
+            </view>
+        </view>
+        <view class="tickets-info" style="width: 100%; justify-content: center; padding: 20rpx 0rpx;">
+            <view style="margin-left: 30rpx; color: #9c9ca4; font-size:30rpx;">
+                <view>
+                    <view style="color: black; font-weight: 600; font-size: 35rpx;">
+                        {{order_info.desc_json.goods_name}}
+                    </view>
+                </view>
+                <view>
+                    <view>
+                        规格：
+                    </view>
+                    <view>
+                        <text>　{{order_info.desc_json.spec_value_0}} {{order_info.desc_json.spec_value_1}}</text>
+                    </view>
+                </view>
+                <view>
+                    <view>
+                        联系人：
+                    </view>
+                    <view>
+                        <text>　{{order_info.desc_json.contacts}}</text>
+                        <text>　</text>
+                        <text>{{order_info.desc_json.tel}}</text>
+                    </view>
+                </view>
+                <view>
+                    <view>
+                        游玩人：
+                    </view>
+                    <view wx:for="{{order_info.desc_json.visitor_list}}" wx:for-index="index" wx:for-item="item" wx:key="name">
+                        <text>　{{item.name}}</text>
+                        <text>　</text>
+                        <text>{{item.idcard}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
