@@ -121,7 +121,15 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    //后台播放音乐
+    const backgroundAudioManager = wx.getBackgroundAudioManager()
+    backgroundAudioManager.title = '绍兴古城-' + this.data.narrator.name
+    backgroundAudioManager.epname = '绍兴古城'
+    backgroundAudioManager.singer = this.data.narrator.name
+    var content_list_tmp = that.data.content_list
+    backgroundAudioManager.coverImgUrl = content_list_tmp[current_index_1]['list'][current_index_2].title_img
+    // 设置了 src 之后就会自动播放，若此处不设置src默认将为空字符串，当设置了src可以播放音乐
+    backgroundAudioManager.src = content_list_tmp[current_index_1]['list'][current_index_2].audio_url
   },
 
   /**
@@ -170,7 +178,13 @@ Page({
 
     // 把当前正在播放的停了
     // console.log('debug', content_list_tmp[current_index_1]['list'][current_index_2])
-    content_list_tmp[current_index_1]['list'][current_index_2].is_open = false
+    try{
+      content_list_tmp[current_index_1]['list'][current_index_2].is_open = false
+    }catch(err){
+      console.log(current_index_1, current_index_2)
+      console.log(content_list_tmp)
+      console.log(err)
+    }
     if(bgMusic[current_music_id] != 0) {
       bgMusic[current_music_id].pause()
     }
