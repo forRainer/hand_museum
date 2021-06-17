@@ -1,4 +1,5 @@
 <!--pages/goods_tickets_use/goods_tickets_use.wxml-->
+<image class='background' src="../../image/background.jpg" mode="aspectFill"></image>
 <view style="width: 100%;display: flex;justify-content: center;align-items: center;">
     <view class="tickets-container">
         <view style="width: 100%; justify-content: center; font-size: 40rpx; font-weight: 600; padding: 10rpx 0rpx;" class="vertical-center tickets-note">

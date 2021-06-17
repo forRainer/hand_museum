@@ -76,7 +76,7 @@
         <view style="display: flex;flex-direction: column;align-items: center;justify-content: center;">
           <view style="font-size: 25rpx; margin: 0;width: 100%; padding-left: 80rpx;" wx:if="{{item_2.free}}">{{item_2.title}}(试听)</view>
           <view style="font-size: 25rpx; margin: 0;width: 100%; padding-left: 80rpx;;" wx:elif="{{isPayed}}">{{item_2.title}}</view>
-          <view style="font-size: 25rpx; margin: 0;width: 100%; padding-left: 80rpx;;" wx:else>{{item_2.title}}<text style="color: red;">(购买定制书签解锁)</text></view>
+          <view style="font-size: 25rpx; margin: 0;width: 100%; padding-left: 80rpx;;" wx:else>{{item_2.title}}<text style="color: red;">(购买后解锁)</text></view>
           <view style="display: flex;">
             <view style="padding-left: 10rpx;">
               <view class='audiosBox_2' wx:if="{{(index_1==0 && index_2==1) || isPayed}}">
@@ -115,16 +115,16 @@
 
   <view style="margin: 45rpx auto;">　</view>
   <view wx:if="{{!isPayed}}" class="buy_bar">
-    <view style="text-align:center; width: 50%;align-items: center;justify-content: center; display:flex; ">
-      <view>购买定制书签支持一下</view>
+    <view style="text-align:center; width: 45%;align-items: center;justify-content: center; display:flex; ">
+      <view></view>
     </view>
-    <view style="text-align:center; width: 20%;align-items: center;justify-content: center; display:flex; color: red;font-size: 50rpx">
+    <view style="text-align:center; width: 15%;align-items: center;justify-content: center; display:flex; color: red;font-size: 50rpx">
       <view>￥{{narrator.price}}</view>
     </view>
-    <view style="text-align:center; width: 30%;align-items: center;justify-content: center; display:flex;">
+    <view style="text-align:center; width: 40%;align-items: center;justify-content: center; display:flex;">
       <!--<view style="background-color: #ba6652; color: white; width: 70%; height: 60%;border-radius: 20rpx;align-items: center;text-align:center;justify-content: center;display:flex;">立即购买</view>-->
-      <button wx:if="{{!is_user_info_ready}}" size="mini" style="background-color: #ba6652; color: white; width: 77%; height: 60%;border-radius: 20rpx;align-items: center;text-align:center;justify-content: center;display:flex;" open-type="getUserInfo" bindgetuserinfo="getUserInfo">购买</button>
-      <button wx:else size="mini" style="background-color: #ba6652; color: white; width: 77%; height: 60%;border-radius: 20rpx;align-items: center;text-align:center;justify-content: center;display:flex;" bindtap="jumpToPreview">购买</button>
+      <button wx:if="{{!is_user_info_ready}}" size="mini" style="background-color: #ba6652; color: white; width: 77%; height: 60%;border-radius: 20rpx;align-items: center;text-align:center;justify-content: center;display:flex;" open-type="getUserInfo" bindgetuserinfo="getUserInfo">立即购买</button>
+      <button wx:else size="mini" style="background-color: #ba6652; color: white; width: 77%; height: 60%;border-radius: 20rpx;align-items: center;text-align:center;justify-content: center;display:flex;" bindtap="jumpToPreview">立即购买</button>
     </view>
   </view>
 

@@ -1,5 +1,6 @@
 <!--pages/mall/mall.wxml-->
 <view>
+    <image class='background' src="../../image/background.jpg" mode="aspectFill"></image>
     <view class="weui-search-bar" style="z-index: 1">
         <view class="weui-search-bar__form">
             <!-- 搜索框 -->

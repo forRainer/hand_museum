@@ -1,4 +1,5 @@
 <!--pages/about/about.wxml-->
+<image class='background' src="../../image/background.jpg" mode="aspectFill"></image>
 <view>
   <view class="weui-flex" style="margin: auto">
     <view class="weui-flex__item" style="font-size: 30rpx; display: flex; margin-top: 7rpx; justify-content: center;">

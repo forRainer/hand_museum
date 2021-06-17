@@ -1,5 +1,6 @@
 <!--pages/goods/goods.wxml-->
 <view>
+    <image class='background' src="../../image/background.jpg" mode="aspectFill"></image>
     <view class="swiper-tab" style="width: 100%;" style="position: fixed; z-index: 3; background-color: white;">
         <view class="swiper-tab-list {{0 == current_tab ? 'on' : 'off'}}" bindtap="viewJump" style="" data-tab="0">商品</view>
         <view class="swiper-tab-list {{1 == current_tab ? 'on' : 'off'}}" bindtap="viewJump" style="" data-tab="1">详情</view>

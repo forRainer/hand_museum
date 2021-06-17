@@ -107,7 +107,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    var opt = {};
+    opt.goods_id = that.data.goods_id;
+    that.onLoad(opt);
   },
 
   /**

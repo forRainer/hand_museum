@@ -51,7 +51,7 @@
     <view class="weui-panel__hd" style="margin-bottom: 20rpx;"></view>
   </view>
 -->
-
+<image class='background' src="../../image/background.jpg" mode="aspectFill"></image>
 <view class="swiper-tab" style="width: 100%;" style="position: fixed; z-index: 3; background-color: white;">
     <view class="swiper-tab-list {{0 == current_tab ? 'on' : 'off'}}" bindtap="changeTab" style="" data-tab="0">讲解订单</view>
     <view class="swiper-tab-list {{1 == current_tab ? 'on' : 'off'}}" bindtap="changeTab" style="" data-tab="1">商城订单</view>

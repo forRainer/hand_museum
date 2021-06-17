@@ -1,5 +1,6 @@
 <!--pages/goods_confirm_tickets/goods_confirm_tickets.wxml-->
 <view>
+    <image class='background' src="../../image/background.jpg" mode="aspectFill"></image>
     <view style="padding:5rpx 20rpx; background-color: white; margin: 20rpx auto">
         <view class='vertical-center' style="font-weight: 600; font-size: 45rpx;">
             {{goods_name}}

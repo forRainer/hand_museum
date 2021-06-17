@@ -123,8 +123,8 @@ Page({
   onHide: function () {
     //后台播放音乐
     const backgroundAudioManager = wx.getBackgroundAudioManager()
-    backgroundAudioManager.title = '绍兴古城-' + this.data.narrator.name
-    backgroundAudioManager.epname = '绍兴古城'
+    backgroundAudioManager.title = '绍兴古城线上讲解-' + this.data.narrator.name
+    backgroundAudioManager.epname = '绍兴古城线上讲解'
     backgroundAudioManager.singer = this.data.narrator.name
     var content_list_tmp = that.data.content_list
     backgroundAudioManager.coverImgUrl = content_list_tmp[current_index_1]['list'][current_index_2].title_img

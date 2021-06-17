@@ -150,7 +150,8 @@ Page({
           title: "已登记，等待管理员审核", // 提示的内容
           icon: "none"
         })
-        mall_order_list_tmp[index].status = '退款中'
+        mall_order_list_tmp[index].status_desc = '退款中'
+        mall_order_list_tmp[index].status = 1
         that.setData({
           mall_order_list: mall_order_list_tmp
         })
