@@ -19,7 +19,7 @@
 
 .on{
     border-bottom: 5rpx solid #63b4ad;
-    font-weight: 600;
+    font-weight: 800;
     margin-left: 100rpx;
     margin-right: 100rpx;
 }
@@ -28,6 +28,7 @@
     opacity: 0.6;
     margin-left: 100rpx;
     margin-right: 100rpx;
+    font-weight: 800;
 }
 
 .img{

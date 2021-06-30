@@ -12,7 +12,7 @@
       <!-- 搜索按钮,调用搜索查询方法 -->
         <view class="cancel-btn" bindtap='方法名a'>搜索</view>
     </view>
-    <view style="height: 117rpx">恭喜李花现了华点</view>
+    <view style="height: 117rpx"> </view>
 
     <scroll-view style="z-index: 0">
         <!-- 此处为列表正文 -->

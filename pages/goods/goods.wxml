@@ -11,7 +11,7 @@
         <view id="goods">
             <swiper autoplay="true" interval="2000" style="width: 100%; height: 414rpx">
                 <swiper-item wx:for="{{img_list}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
-                    <image src='{{item}}' data-index="{{index}}" mode='aspectFill' class='img' bindtap="previewImg"/>
+                    <image src='{{item}}' data-index="{{index}}" mode='widthFix' class='img' bindtap="previewImg"/>
                 </swiper-item>
             </swiper>
         </view>

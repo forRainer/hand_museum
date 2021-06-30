@@ -29,9 +29,14 @@ Page({
       },
       success: function(res) {
         console.log('get_orders', res.data)
+        var show_tab = that.data.current_tab
+        if(res.data.order_count>0){
+          show_tab = 0
+        }
         that.setData({
           order_count: res.data.order_count,
           order_list: res.data.order_list,
+          current_tab: show_tab
         })
       }
     })
