@@ -100,7 +100,8 @@
         <view class="weui-flex" style="margin: auto">
           <view class="weui-flex__item">
             <view style="font-size: 25rpx; margin-left: 131rpx">
-              <button class="btn" hover-class="btn_hover" data-index="{{index}}" bindtap="jumpTo">进入讲解</button>
+              <button wx:if="{{order_list[index].status == 1}}" class="btn" hover-class="btn_hover" data-index="{{index}}" bindtap="jumpTo">进入讲解</button>
+              <button wx:else class="btn" hover-class="btn_hover" data-index="{{index}}" bindtap="jumpTo">已失效</button>
             </view>
           </view>
         </view>

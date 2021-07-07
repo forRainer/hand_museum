@@ -16,6 +16,7 @@
       </view>
       <view class="weui-form-preview__item">
         <label class="weui-form-preview__label">其他说明</label>
+        <text class="weui-form-preview__value" style="color:red">语音讲解七天内有效</text>
         <text class="weui-form-preview__value">感谢您的支持</text>
       </view>
     </view>
